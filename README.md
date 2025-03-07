@@ -1,41 +1,16 @@
-# My Flutter App
+# akgamarra_app
 
-Este es un proyecto de aplicación móvil desarrollado con Flutter que consume microservicios de un backend.
+A new Flutter project.
 
-## Estructura del Proyecto
+## Getting Started
 
-- `lib/main.dart`: Punto de entrada de la aplicación.
-- `lib/screens/home_screen.dart`: Pantalla principal de la aplicación.
-- `lib/services/api_service.dart`: Servicio para realizar solicitudes HTTP a los microservicios.
-- `lib/models/user_model.dart`: Modelo que define la estructura de un usuario.
-- `pubspec.yaml`: Configuración del proyecto Flutter.
+This project is a starting point for a Flutter application.
 
-## Requisitos
+A few resources to get you started if this is your first Flutter project:
 
-Asegúrate de tener instalado Flutter en tu máquina. Puedes seguir las instrucciones en [flutter.dev](https://flutter.dev/docs/get-started/install) para la instalación.
+- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
+- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
 
-## Instalación
-
-1. Clona el repositorio:
-   ```
-   git clone <URL_DEL_REPOSITORIO>
-   ```
-2. Navega al directorio del proyecto:
-   ```
-   cd my-flutter-app
-   ```
-3. Instala las dependencias:
-   ```
-   flutter pub get
-   ```
-
-## Ejecución
-
-Para ejecutar la aplicación, utiliza el siguiente comando:
-```
-flutter run
-```
-
-## Contribuciones
-
-Las contribuciones son bienvenidas. Si deseas contribuir, por favor abre un issue o un pull request.
+For help getting started with Flutter development, view the
+[online documentation](https://docs.flutter.dev/), which offers tutorials,
+samples, guidance on mobile development, and a full API reference.
