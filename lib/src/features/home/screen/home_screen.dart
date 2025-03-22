@@ -1,4 +1,5 @@
-import 'package:akgamarra_app/src/core/service/login_service.dart';
+import 'package:akgamarra_app/src/core/handler/login_handler.dart';
+import 'package:akgamarra_app/src/core/store/auth_store.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
@@ -8,37 +9,33 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Consumer<LoginService>(
-        builder: (context, authService, child) {
-          final user = authService.user;
+    final authState = context.watch<AuthStore>();
+    final loginService = context.read<LoginHandler>();
 
-          return Center(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Text(
-                  (user != null) ? "Usuario: ${user.alias}" : "",
-                  style: const TextStyle(fontSize: 24),
-                ),
-                ElevatedButton(
-                  onPressed: () async {
-                    await authService.signOut();
-                    context.go('/login');
-                  },
-                  child: Text("Cerrar sesión"),
-                ),
-                const SizedBox(height: 16),
-                ElevatedButton(
-                  onPressed: () {
-                    context.go('/');
-                  },
-                  child: const Text("Ir a Dashboard"),
-                ),
-              ],
+    final user = authState.user;
+
+    return Scaffold(
+      appBar: AppBar(title: const Text("Home")),
+      body: Center(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            if (user != null) ...[
+              Text(
+                "Usuario: ${user.alias}",
+                style: const TextStyle(fontSize: 24),
+              ),
+              const SizedBox(height: 16),
+            ],
+            ElevatedButton(
+              onPressed: () async {
+                await loginService.signOut();
+                context.go('/login');
+              },
+              child: const Text("Cerrar sesión"),
             ),
-          );
-        },
+          ],
+        ),
       ),
     );
   }

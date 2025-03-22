@@ -1,24 +1,23 @@
+import 'dart:developer';
+
 import 'package:akgamarra_app/src/core/model/response/user_response.dart';
-import 'package:akgamarra_app/src/core/service/login_service.dart';
 import 'package:dio/dio.dart';
-import 'package:flutter/cupertino.dart';
 
-class AuthService extends ChangeNotifier {
+class AuthService {
   final Dio dio;
-  final LoginService loginService;
+  final String URL_BASE = "http://69.197.164.187:8980";
 
-  AuthService({required this.dio, required this.loginService});
+  AuthService({required this.dio});
 
-  Future<UserResponse?> getUser() async {
+  Future<UserResponse?> validateToken(String token) async {
+    final String METHOD_PATH = '$URL_BASE/auth/validate';
+    var options = Options(headers: {"Authorization": "Bearer $token"});
+
     try {
-      Response<UserResponse> response = await dio.get(
-        'http://192.168.1.6:8080/auth/verify-token',
-        options: Options(
-          headers: {"Authorization": "Bearer $loginService.token"},
-        ),
-      );
-      return response.data;
-    } catch (e) {
+      log("Enviando token al backend: $token");
+      final response = await dio.get(METHOD_PATH, options: options);
+      return UserResponse.fromJson(response.data);
+    } catch (e, stacktrace) {
       return null;
     }
   }

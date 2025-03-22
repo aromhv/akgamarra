@@ -1,4 +1,4 @@
-import 'package:akgamarra_app/src/core/service/login_service.dart';
+import 'package:akgamarra_app/src/core/handler/login_handler.dart';
 import 'package:akgamarra_app/src/features/auth/widget/social_media_button.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -10,41 +10,44 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final loginService = context.read<LoginHandler>();
+
+    singInSocialMedia(String service) async {
+      final user = await loginService.signIn(service);
+      if (user != null) {
+        context.go('/');
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text("Error al iniciar sesión con Google")),
+        );
+      }
+    }
+
     return Scaffold(
-      body: Consumer<LoginService>(
-        builder: (context, authService, child) {
-          return Center(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                SocialMediaButton(
-                  icon: FontAwesomeIcons.google,
-                  buttonText: "Iniciar sesion con gmail",
-                  color: Colors.red,
-                  onPressed: () async {
-                    await authService.signInWithGoogle();
-                    context.go('/');
-                  },
-                ),
-                SizedBox(height: 10),
-                SocialMediaButton(
-                  icon: FontAwesomeIcons.facebook,
-                  buttonText: "Iniciar sesion con facebook",
-                  color: Colors.blueAccent,
-                  onPressed: () async {},
-                ),
-                SizedBox(height: 10),
-                SocialMediaButton(
-                  icon: FontAwesomeIcons.twitter,
-                  buttonText: "Iniciar sesion con twitter",
-                  color: Colors.black87,
-                  onPressed: () async {},
-                ),
-              ],
+      appBar: AppBar(title: const Text("Login")),
+      body: Center(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            SocialMediaButton(
+              icon: FontAwesomeIcons.google,
+              buttonText: "Iniciar sesión con Google",
+              color: Colors.red,
+              onPressed: () async {
+                await singInSocialMedia("GOOGLE");
+              },
             ),
-          );
-        },
+            const SizedBox(height: 10),
+            SocialMediaButton(
+              icon: FontAwesomeIcons.facebook,
+              buttonText: "Iniciar sesión con Facebook",
+              color: Colors.blueAccent,
+              onPressed: () async {
+                await singInSocialMedia("GOOGLE");
+              },
+            ),
+          ],
+        ),
       ),
     );
   }
