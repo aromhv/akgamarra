@@ -7,7 +7,7 @@ class AuthGuard {
   static String? redirectLogic(BuildContext context, GoRouterState state) {
     final authService = Provider.of<AuthStore>(context, listen: false);
     final isAuthenticated = authService.user != null;
-    if (isAuthenticated) return '/';
+    //if (isAuthenticated) return '/';
     if (!isAuthenticated && state.matchedLocation != '/login') return '/login';
     return null;
   }

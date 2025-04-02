@@ -26,14 +26,33 @@ class HomeScreen extends StatelessWidget {
                 style: const TextStyle(fontSize: 24),
               ),
               const SizedBox(height: 16),
+              ElevatedButton(
+                onPressed: () async {
+                  await loginService.signOut();
+                  context.go('/login');
+                },
+                child: const Text("Cerrar sesión"),
+              ),
+
+              if (user.roles.contains("trader")) ...[
+                if (user.storeId == null) ...[
+                  ElevatedButton(
+                    onPressed: () {
+                      context.go('/store/create');
+                    },
+                    child: Text("Crear tienda"),
+                  ),
+                ],
+                if (user.storeId != null) ...[
+                  ElevatedButton(
+                    onPressed: () {
+                      context.go('/store');
+                    },
+                    child: Text("Ver mi tienda"),
+                  ),
+                ],
+              ],
             ],
-            ElevatedButton(
-              onPressed: () async {
-                await loginService.signOut();
-                context.go('/login');
-              },
-              child: const Text("Cerrar sesión"),
-            ),
           ],
         ),
       ),

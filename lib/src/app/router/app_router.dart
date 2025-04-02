@@ -3,6 +3,8 @@ import 'package:akgamarra_app/src/features/account/screen/account_screen.dart';
 import 'package:akgamarra_app/src/features/account/screen/create_account_screen.dart';
 import 'package:akgamarra_app/src/features/auth/screen/login_screen.dart';
 import 'package:akgamarra_app/src/features/home/screen/home_screen.dart';
+import 'package:akgamarra_app/src/features/store/screen/create_store_screen.dart';
+import 'package:akgamarra_app/src/features/store/screen/store_screen.dart';
 import 'package:go_router/go_router.dart';
 
 final GoRouter router = GoRouter(
@@ -22,6 +24,18 @@ final GoRouter router = GoRouter(
         ),
       ],
       builder: (context, state) => const AccountScreen(),
+    ),
+    GoRoute(
+      path: '/store',
+      routes: [
+        GoRoute(
+          path: 'create',
+          builder: (context, state) {
+            return CreateStoreScreen();
+          },
+        ),
+      ],
+      builder: (context, state) => const StoreScreen(),
     ),
   ],
 );

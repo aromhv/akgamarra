@@ -7,18 +7,20 @@ class UserResponse {
   String email;
   String alias;
   String picture;
+  List<String> roles;
 
+  String? storeId;
   String? lastName;
   String? firstName;
   String? numberPhone;
   String? documentType;
   String? documentNumber;
-  List<String>? roles;
 
   UserResponse({
     required this.alias,
     required this.email,
     required this.picture,
+    required this.roles,
   });
 
   factory UserResponse.fromJson(Map<String, dynamic> json) =>
