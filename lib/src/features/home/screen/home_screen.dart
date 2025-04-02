@@ -1,5 +1,5 @@
+import 'package:akgamarra_app/src/core/context/auth_context.dart';
 import 'package:akgamarra_app/src/core/handler/login_handler.dart';
-import 'package:akgamarra_app/src/core/store/auth_store.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
@@ -9,7 +9,7 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final authState = context.watch<AuthStore>();
+    final authState = context.watch<AuthContext>();
     final loginService = context.read<LoginHandler>();
 
     final user = authState.user;
@@ -38,7 +38,7 @@ class HomeScreen extends StatelessWidget {
                 if (user.storeId == null) ...[
                   ElevatedButton(
                     onPressed: () {
-                      context.go('/store/create');
+                      context.go('/context/create');
                     },
                     child: Text("Crear tienda"),
                   ),
@@ -46,7 +46,7 @@ class HomeScreen extends StatelessWidget {
                 if (user.storeId != null) ...[
                   ElevatedButton(
                     onPressed: () {
-                      context.go('/store');
+                      context.go('/context');
                     },
                     child: Text("Ver mi tienda"),
                   ),

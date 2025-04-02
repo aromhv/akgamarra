@@ -10,10 +10,10 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final loginService = context.read<LoginHandler>();
+    final loginHandler = context.read<LoginHandler>();
 
     singInSocialMedia(String service) async {
-      final user = await loginService.signIn(service);
+      final user = await loginHandler.signIn(service);
       if (user != null) {
         context.go('/');
       } else {

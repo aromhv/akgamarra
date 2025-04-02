@@ -26,7 +26,7 @@ final GoRouter router = GoRouter(
       builder: (context, state) => const AccountScreen(),
     ),
     GoRoute(
-      path: '/store',
+      path: '/context',
       routes: [
         GoRoute(
           path: 'create',

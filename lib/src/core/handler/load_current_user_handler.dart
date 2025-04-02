@@ -1,9 +1,9 @@
 import 'package:akgamarra_app/src/core/service/auth_service.dart';
-import 'package:akgamarra_app/src/core/store/auth_store.dart';
+import 'package:akgamarra_app/src/core/context/auth_context.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class LoadCurrentUserHandler {
-  final AuthStore authState;
+  final AuthContext authState;
   final AuthService authService;
 
   LoadCurrentUserHandler(this.authService, this.authState);

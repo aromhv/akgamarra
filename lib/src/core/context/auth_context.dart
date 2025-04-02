@@ -1,7 +1,7 @@
 import 'package:akgamarra_app/src/core/model/response/user_response.dart';
 import 'package:flutter/cupertino.dart';
 
-class AuthStore extends ChangeNotifier {
+class AuthContext extends ChangeNotifier {
   String? _token;
   UserResponse? _user;
   bool _isInitialized = false;
