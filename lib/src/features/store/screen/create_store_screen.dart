@@ -8,11 +8,13 @@ import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 class CreateStoreScreen extends StatefulWidget {
+  const CreateStoreScreen({super.key});
+
   @override
-  _MinimalStoreFormState createState() => _MinimalStoreFormState();
+  MinimalStoreFormState createState() => MinimalStoreFormState();
 }
 
-class _MinimalStoreFormState extends State<CreateStoreScreen> {
+class MinimalStoreFormState extends State<CreateStoreScreen> {
   final _formKey = GlobalKey<FormState>();
 
   String _selectedDocumentType = 'RUC';

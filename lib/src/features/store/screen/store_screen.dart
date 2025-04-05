@@ -28,12 +28,6 @@ class StoreScreen extends StatelessWidget {
               children: [
                 Text("${store?.name}", style: TextStyle(fontSize: 30)),
                 Text("${store?.description}", style: TextStyle(fontSize: 18)),
-                ElevatedButton(
-                  onPressed: () {
-                    context.go('/');
-                  },
-                  child: const Text("Ir al home"),
-                ),
               ],
             );
           },

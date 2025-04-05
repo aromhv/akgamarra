@@ -1,3 +1,5 @@
+import 'package:akgamarra_app/src/core/model/response/navigation_response.dart';
+import 'package:akgamarra_app/src/core/model/response/role_response.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'user_response.g.dart';
@@ -7,7 +9,8 @@ class UserResponse {
   String email;
   String alias;
   String picture;
-  List<String> roles;
+  List<RoleResponse> roles;
+  NavigationResponse navigation;
 
   String? storeId;
   String? lastName;
@@ -21,6 +24,7 @@ class UserResponse {
     required this.email,
     required this.picture,
     required this.roles,
+    required this.navigation,
   });
 
   factory UserResponse.fromJson(Map<String, dynamic> json) =>

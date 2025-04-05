@@ -15,7 +15,6 @@ class HomeScreen extends StatelessWidget {
     final user = authState.user;
 
     return Scaffold(
-      appBar: AppBar(title: const Text("Home")),
       body: Center(
         child: Column(
           mainAxisSize: MainAxisSize.min,
@@ -33,25 +32,6 @@ class HomeScreen extends StatelessWidget {
                 },
                 child: const Text("Cerrar sesión"),
               ),
-
-              if (user.roles.contains("trader")) ...[
-                if (user.storeId == null) ...[
-                  ElevatedButton(
-                    onPressed: () {
-                      context.go('/context/create');
-                    },
-                    child: Text("Crear tienda"),
-                  ),
-                ],
-                if (user.storeId != null) ...[
-                  ElevatedButton(
-                    onPressed: () {
-                      context.go('/context');
-                    },
-                    child: Text("Ver mi tienda"),
-                  ),
-                ],
-              ],
             ],
           ],
         ),

@@ -12,7 +12,12 @@ UserResponse _$UserResponseFromJson(Map<String, dynamic> json) =>
         email: json['email'] as String,
         picture: json['picture'] as String,
         roles:
-            (json['roles'] as List<dynamic>).map((e) => e as String).toList(),
+            (json['roles'] as List<dynamic>)
+                .map((e) => RoleResponse.fromJson(e as Map<String, dynamic>))
+                .toList(),
+        navigation: NavigationResponse.fromJson(
+          json['navigation'] as Map<String, dynamic>,
+        ),
       )
       ..storeId = json['storeId'] as String?
       ..lastName = json['lastName'] as String?
@@ -27,6 +32,7 @@ Map<String, dynamic> _$UserResponseToJson(UserResponse instance) =>
       'alias': instance.alias,
       'picture': instance.picture,
       'roles': instance.roles,
+      'navigation': instance.navigation,
       'storeId': instance.storeId,
       'lastName': instance.lastName,
       'firstName': instance.firstName,
