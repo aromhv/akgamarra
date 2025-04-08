@@ -1,7 +1,6 @@
 import 'package:akgamarra_app/src/core/context/auth_context.dart';
 import 'package:akgamarra_app/src/core/handler/login_handler.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -23,14 +22,6 @@ class HomeScreen extends StatelessWidget {
               Text(
                 "Usuario: ${user.alias}",
                 style: const TextStyle(fontSize: 24),
-              ),
-              const SizedBox(height: 16),
-              ElevatedButton(
-                onPressed: () async {
-                  await loginService.signOut();
-                  context.go('/login');
-                },
-                child: const Text("Cerrar sesión"),
               ),
             ],
           ],
