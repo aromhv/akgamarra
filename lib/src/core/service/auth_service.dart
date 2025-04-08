@@ -18,6 +18,7 @@ class AuthService {
       final response = await dio.get(METHOD_PATH, options: options);
       return UserResponse.fromJson(response.data);
     } catch (e, stacktrace) {
+      log(e.toString());
       return null;
     }
   }
