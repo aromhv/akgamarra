@@ -18,36 +18,70 @@ class LoginScreen extends StatelessWidget {
         context.go('/');
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text("Error al iniciar sesión con Google")),
+          const SnackBar(content: Text("Error al iniciar sesión")),
         );
       }
     }
 
     return Scaffold(
-      appBar: AppBar(title: const Text("Login")),
-      body: Center(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            SocialMediaButton(
-              icon: FontAwesomeIcons.google,
-              buttonText: "Iniciar sesión con Google",
-              color: Colors.red,
-              onPressed: () async {
-                await singInSocialMedia("GOOGLE");
-              },
+      backgroundColor: Colors.white,
+      body: Column(
+        children: [
+          const Spacer(),
+          Column(
+            children: [
+              Image.asset('assets/logo.jpg', height: 300),
+              const SizedBox(height: 10),
+              const Text(
+                "GAMARRA AKa",
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              ),
+            ],
+          ),
+          const Spacer(),
+          Container(
+            padding: const EdgeInsets.all(80),
+            decoration: const BoxDecoration(
+              color: Color(0xFF650FED),
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(40),
+                topRight: Radius.circular(40),
+              ),
             ),
-            const SizedBox(height: 10),
-            SocialMediaButton(
-              icon: FontAwesomeIcons.facebook,
-              buttonText: "Iniciar sesión con Facebook",
-              color: Colors.blueAccent,
-              onPressed: () async {
-                await singInSocialMedia("GOOGLE");
-              },
+            child: Column(
+              children: [
+                const Text(
+                  "¡Bienvenido!",
+                  style: TextStyle(fontSize: 22, color: Colors.white, fontWeight: FontWeight.bold),
+                ),
+                const SizedBox(height: 10),
+                const Text(
+                  "Para iniciar sesión usa tu cuenta de Google o cuenta de Facebook",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(fontSize: 14, color: Colors.white70),
+                ),
+                const SizedBox(height: 20),
+                SocialMediaButton(
+                  icon: FontAwesomeIcons.google,
+                  buttonText: "Usar Google",
+                  color: Colors.black,
+                  onPressed: () async {
+                    await singInSocialMedia("GOOGLE");
+                  },
+                ),
+                const SizedBox(height: 10),
+                SocialMediaButton(
+                  icon: FontAwesomeIcons.facebook,
+                  buttonText: "Usar Facebook",
+                  color: Colors.black,
+                  onPressed: () async {
+                    await singInSocialMedia("FACEBOOK");
+                  },
+                ),
+              ],
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
