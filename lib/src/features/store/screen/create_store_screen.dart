@@ -60,7 +60,6 @@ class MinimalStoreFormState extends State<CreateStoreScreen> {
 
     return Scaffold(
       resizeToAvoidBottomInset: true,
-      appBar: AppBar(title: Text('Registro de Tienda')),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),
         child: Form(

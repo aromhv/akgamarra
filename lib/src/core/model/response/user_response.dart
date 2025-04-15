@@ -9,6 +9,7 @@ class UserResponse {
   String email;
   String alias;
   String picture;
+  bool verified;
   List<RoleResponse> roles;
   NavigationResponse navigation;
 
@@ -23,6 +24,7 @@ class UserResponse {
     required this.alias,
     required this.email,
     required this.picture,
+    required this.verified,
     required this.roles,
     required this.navigation,
   });

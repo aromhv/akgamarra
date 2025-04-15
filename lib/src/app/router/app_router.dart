@@ -1,4 +1,6 @@
 import 'package:akgamarra_app/src/app/guard/auth_guard.dart';
+import 'package:akgamarra_app/src/features/account/screen/account_screen.dart';
+import 'package:akgamarra_app/src/features/account/screen/create_account_screen.dart';
 import 'package:akgamarra_app/src/features/auth/screen/login_screen.dart';
 import 'package:akgamarra_app/src/features/home/screen/home_screen.dart';
 import 'package:akgamarra_app/src/features/store/screen/create_store_screen.dart';
@@ -24,6 +26,14 @@ final GoRouter router = GoRouter(
         GoRoute(
           path: '/store-create',
           builder: (context, state) => const CreateStoreScreen(),
+        ),
+        GoRoute(
+          path: '/profile',
+          builder: (context, state) => const AccountScreen(),
+        ),
+        GoRoute(
+          path: '/complete-data',
+          builder: (context, state) => const CreateAccountScreen(),
         ),
       ],
     ),
