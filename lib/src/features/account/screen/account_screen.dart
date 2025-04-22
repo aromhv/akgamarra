@@ -23,7 +23,7 @@ class AccountScreen extends StatelessWidget {
                 height: 220,
                 decoration: const BoxDecoration(
                   gradient: LinearGradient(
-                    colors: [Color(0xFFDA22FF), Color(0xFF9733EE)],
+                    colors: [Color(0xFF650FED), Color(0xFF9733EE)],
                     begin: Alignment.topLeft,
                     end: Alignment.bottomRight,
                   ),
@@ -127,7 +127,7 @@ class AccountScreen extends StatelessWidget {
                     child:ElevatedButton(
                       onPressed: () => context.go('/complete-data'),
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.purple, // Color de fondo
+                        backgroundColor: Color(0xFF650FED), // Color de fondo
                         foregroundColor: Colors.white, // Color del texto
                         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15), // Espaciado interno
                         shape: RoundedRectangleBorder(
