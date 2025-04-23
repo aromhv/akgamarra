@@ -1,8 +1,8 @@
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:go_router/go_router.dart';
 import 'package:akgamarra_app/src/core/context/auth_context.dart';
-import 'package:flutter/services.dart';
+import 'package:akgamarra_app/src/core/enum/color_enum.dart';
+import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
 
 class AccountScreen extends StatelessWidget {
   const AccountScreen({super.key});
@@ -21,16 +21,7 @@ class AccountScreen extends StatelessWidget {
             children: [
               Container(
                 height: 220,
-                decoration: const BoxDecoration(
-                  gradient: LinearGradient(
-                    colors: [Color(0xFF650FED), Color(0xFF9733EE)],
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight,
-                  ),
-                  borderRadius: BorderRadius.vertical(
-                    bottom: Radius.circular(30),
-                  ),
-                ),
+                color: ColorEnum.COLOR_PRINCIPAL.color,
                 alignment: Alignment.center,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -40,14 +31,21 @@ class AccountScreen extends StatelessWidget {
                       user != null && user.verified
                           ? '${user.firstName} ${user.lastName}'
                           : user?.alias ?? '',
-                      style: const TextStyle(color: Colors.white, fontSize: 24, fontWeight: FontWeight.bold),
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 36,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                     const SizedBox(height: 5),
                     Text(
                       user != null && user.verified
                           ? 'Bienvenido a tu perfil'
                           : user?.email ?? '',
-                      style: const TextStyle(color: Colors.white70, fontSize: 14),
+                      style: const TextStyle(
+                        color: Colors.white70,
+                        fontSize: 14,
+                      ),
                     ),
                   ],
                 ),
@@ -60,14 +58,17 @@ class AccountScreen extends StatelessWidget {
                   alignment: Alignment.center,
                   child: CircleAvatar(
                     radius: 50,
-                    backgroundImage: user?.picture != null && user!.picture.isNotEmpty
-                        ? NetworkImage(user.picture)
-                        : const AssetImage('assets/images/profile_placeholder.png') as ImageProvider,
+                    backgroundImage:
+                        user?.picture != null && user!.picture.isNotEmpty
+                            ? NetworkImage(user.picture)
+                            : const AssetImage(
+                                  'assets/images/profile_placeholder.png',
+                                )
+                                as ImageProvider,
                     backgroundColor: Colors.white,
                   ),
                 ),
               ),
-
             ],
           ),
           const SizedBox(height: 50),
@@ -102,9 +103,7 @@ class AccountScreen extends StatelessWidget {
                   ),
                   ListTile(
                     title: Text('Teléfono'),
-                    subtitle: Text(user.numberPhone ?? 'No disponible'
-
-                    ),
+                    subtitle: Text(user.numberPhone ?? 'No disponible'),
                   ),
                   ListTile(
                     title: Text('Tipo de documento'),
@@ -120,31 +119,35 @@ class AccountScreen extends StatelessWidget {
                       subtitle: Text(user.storeId ?? 'No disponible'),
                     ),
                 ],
-                // Agregar botón si el usuario no está verificado
                 if (user != null && !user.verified)
                   Padding(
                     padding: const EdgeInsets.only(top: 10.0),
-                    child:ElevatedButton(
+                    child: ElevatedButton(
                       onPressed: () => context.go('/complete-data'),
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: Color(0xFF650FED), // Color de fondo
-                        foregroundColor: Colors.white, // Color del texto
-                        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15), // Espaciado interno
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(30), // Bordes redondeados
+                        backgroundColor: ColorEnum.COLOR_PRINCIPAL.color,
+                        foregroundColor: Colors.white,
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 20,
+                          vertical: 15,
                         ),
-                        elevation: 5, // Sombra del botón
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(30),
+                        ),
+                        elevation: 5,
                       ),
                       child: const Text(
                         "Completar mis datos",
-                        style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold), // Estilo del texto
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ),
                   ),
               ],
             ),
-          )
-
+          ),
         ],
       ),
     );
@@ -161,7 +164,10 @@ class _StatItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Text(value, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+        Text(
+          value,
+          style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+        ),
         const SizedBox(height: 4),
         Text(label, style: const TextStyle(color: Colors.grey)),
       ],

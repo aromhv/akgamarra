@@ -1,8 +1,10 @@
 import 'package:akgamarra_app/src/core/context/auth_context.dart';
+import 'package:akgamarra_app/src/core/enum/color_enum.dart';
 import 'package:akgamarra_app/src/core/enum/icon_enum.dart';
 import 'package:akgamarra_app/src/core/handler/login_handler.dart';
 import 'package:akgamarra_app/src/core/model/response/nav_response.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
@@ -20,9 +22,9 @@ class MainLayoutState extends State<MainLayout> {
 
   @override
   Widget build(BuildContext context) {
-    final authState = context.watch<AuthContext>();
+    final authContext = context.watch<AuthContext>();
     final loginService = context.read<LoginHandler>();
-    final user = authState.user;
+    final user = authContext.user;
 
     List<NavResponse> sideBarItems = [];
     List<NavResponse> bottomNavItems = [];
@@ -48,38 +50,58 @@ class MainLayoutState extends State<MainLayout> {
       }
     }
 
-    return Scaffold(
-      appBar: AppBar(title: Text("AK Gamarra")),
-      body: widget.child,
-      drawer: Drawer(
-        child: ListView(
-          children:
-              sideBarItems
-                  .map(
-                    (item) => ListTile(
-                      leading: IconEnum.findIconByName(item.icon),
-                      title: Text(item.label),
-                      onTap: () => onItemTappedSideBar(item),
-                    ),
-                  )
-                  .toList(),
-        ),
+    SystemChrome.setSystemUIOverlayStyle(
+      SystemUiOverlayStyle(
+        statusBarColor: Colors.transparent,
+        statusBarIconBrightness: Brightness.light,
       ),
-      bottomNavigationBar:
-          (bottomNavItems.isEmpty)
-              ? null
-              : BottomNavigationBar(
-                type: BottomNavigationBarType.fixed,
-                currentIndex: selectedIndex,
-                onTap: onItemTapped,
-                items:
-                    bottomNavItems.map((item) {
-                      return BottomNavigationBarItem(
-                        label: item.label,
-                        icon: IconEnum.findIconByName(item.icon),
-                      );
-                    }).toList(),
-              ),
+    );
+
+    return AnnotatedRegion<SystemUiOverlayStyle>(
+      value: SystemUiOverlayStyle.light,
+      child: Scaffold(
+        extendBodyBehindAppBar: true,
+        appBar: AppBar(
+          elevation: 0,
+          backgroundColor: ColorEnum.COLOR_PRINCIPAL.color,
+          title: const Text("AK Gamarra"),
+        ),
+        body: Container(
+          padding: EdgeInsets.only(
+            top: MediaQuery.of(context).padding.top + kToolbarHeight,
+          ),
+          child: widget.child,
+        ),
+        drawer: Drawer(
+          child: ListView(
+            children:
+                sideBarItems
+                    .map(
+                      (item) => ListTile(
+                        leading: IconEnum.findIconByName(item.icon),
+                        title: Text(item.label),
+                        onTap: () => onItemTappedSideBar(item),
+                      ),
+                    )
+                    .toList(),
+          ),
+        ),
+        bottomNavigationBar:
+            bottomNavItems.isEmpty
+                ? null
+                : BottomNavigationBar(
+                  type: BottomNavigationBarType.fixed,
+                  currentIndex: selectedIndex,
+                  onTap: onItemTapped,
+                  items:
+                      bottomNavItems.map((item) {
+                        return BottomNavigationBarItem(
+                          label: item.label,
+                          icon: IconEnum.findIconByName(item.icon),
+                        );
+                      }).toList(),
+                ),
+      ),
     );
   }
 }

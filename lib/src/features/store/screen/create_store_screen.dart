@@ -42,6 +42,9 @@ class MinimalStoreFormState extends State<CreateStoreScreen> {
     );
   }
 
+  /*
+  ToDo: Optimizar?
+   */
   void _addTag() {
     final newTag = _newTagController.text.trim();
     if (newTag.isNotEmpty && !_tags.contains(newTag)) {
