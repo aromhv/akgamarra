@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 enum IconEnum {
+  ICON_ARROW_BACK("arrow_back", Icon(Icons.arrow_back)),
   ICON_STOREFRONT("storefront", Icon(Icons.storefront)),
   ICON_ADD("add", Icon(Icons.add)),
   ICON_STORE("store", Icon(Icons.store)),
