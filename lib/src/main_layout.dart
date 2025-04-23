@@ -1,8 +1,8 @@
 import 'package:akgamarra_app/src/core/context/auth_context.dart';
-import 'package:akgamarra_app/src/core/enum/color_enum.dart';
 import 'package:akgamarra_app/src/core/enum/icon_enum.dart';
 import 'package:akgamarra_app/src/core/handler/login_handler.dart';
 import 'package:akgamarra_app/src/core/model/response/nav_response.dart';
+import 'package:akgamarra_app/src/core/widget/header_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
@@ -61,11 +61,7 @@ class MainLayoutState extends State<MainLayout> {
       value: SystemUiOverlayStyle.light,
       child: Scaffold(
         extendBodyBehindAppBar: true,
-        appBar: AppBar(
-          elevation: 0,
-          backgroundColor: ColorEnum.COLOR_PRINCIPAL.color,
-          title: const Text("AK Gamarra"),
-        ),
+        appBar: HeaderWidget(),
         body: Container(
           padding: EdgeInsets.only(
             top: MediaQuery.of(context).padding.top + kToolbarHeight,
