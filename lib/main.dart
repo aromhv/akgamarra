@@ -8,14 +8,27 @@ import 'package:akgamarra_app/src/core/service/socialmedia/google_service.dart';
 import 'package:akgamarra_app/src/core/service/store_service.dart';
 import 'package:dio/dio.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:provider/provider.dart';
 
 import 'src/core/option/firebase_options.dart';
 
-void main() async {
+final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+    FlutterLocalNotificationsPlugin();
+
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  await FirebaseMessaging.instance.requestPermission();
+  const androidInit = AndroidInitializationSettings('@mipmap/ic_launcher');
+  const initSettings = InitializationSettings(android: androidInit);
+  await flutterLocalNotificationsPlugin.initialize(initSettings);
+  FirebaseMessaging.onMessage.listen(
+    (RemoteMessage message) => showNotification(message),
+  );
 
   final dio = Dio();
 
@@ -56,6 +69,25 @@ void main() async {
         ),
       ],
       child: const MyApp(),
+    ),
+  );
+}
+
+Future<void> showNotification(RemoteMessage message) async {
+  final id = int.parse(message.data['id']);
+  await flutterLocalNotificationsPlugin.show(
+    id,
+    message.data['issue'],
+    message.data['body'],
+    NotificationDetails(
+      android: AndroidNotificationDetails(
+        'sourcing_channel',
+        'solicitudes',
+        channelDescription:
+            'Notificaciones cuando tus productos coinciden con solicitudes',
+        importance: Importance.max,
+        priority: Priority.high,
+      ),
     ),
   );
 }

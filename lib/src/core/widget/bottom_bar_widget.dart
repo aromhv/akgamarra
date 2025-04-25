@@ -21,11 +21,13 @@ class BottomBarWidget extends StatelessWidget {
       return BottomNavigationBarItem(
         label: nav.label,
         icon: IconEnum.findIconByName(nav.icon),
-        backgroundColor: ColorEnum.COLOR_PRINCIPAL.color,
       );
     }
 
     return BottomNavigationBar(
+      backgroundColor: ColorEnum.COLOR_PRINCIPAL.color,
+      selectedItemColor: ColorEnum.COLOR_SELECTED.color,
+      unselectedItemColor: ColorEnum.COLOR_UNSELECTED.color,
       onTap: onItemTapped,
       currentIndex: currentIndex,
       items: bottomNavItems.map((nav) => toItem(nav)).toList(),
