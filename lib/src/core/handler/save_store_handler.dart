@@ -4,13 +4,13 @@ import 'package:akgamarra_app/src/core/model/response/store_response.dart';
 import 'package:akgamarra_app/src/core/service/store_service.dart';
 import 'package:flutter/cupertino.dart';
 
-class StoreHandler {
+class SaveStoreHandler {
   final AuthContext authState;
   final StoreService storeService;
 
   final ValueNotifier<bool> isSaving = ValueNotifier(false);
 
-  StoreHandler(this.authState, this.storeService);
+  SaveStoreHandler(this.authState, this.storeService);
 
   Future<StoreResponse?> save(StoreRequest request) async {
     isSaving.value = true;
@@ -20,12 +20,5 @@ class StoreHandler {
     } finally {
       isSaving.value = false;
     }
-  }
-
-  Future<StoreResponse?> findById() async {
-    var token = authState.token;
-    var user = authState.user;
-    final response = await storeService.findById(token!, user!.storeId!);
-    return response;
   }
 }

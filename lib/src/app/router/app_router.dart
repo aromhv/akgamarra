@@ -4,8 +4,9 @@ import 'package:akgamarra_app/src/features/account/screen/account_screen.dart';
 import 'package:akgamarra_app/src/features/account/screen/create_account_screen.dart';
 import 'package:akgamarra_app/src/features/auth/screen/login_screen.dart';
 import 'package:akgamarra_app/src/features/home/screen/home_screen.dart';
-import 'package:akgamarra_app/src/features/store/screen/create_store_screen.dart';
-import 'package:akgamarra_app/src/features/store/screen/store_screen.dart';
+import 'package:akgamarra_app/src/features/me-store/screen/me_store_screen.dart';
+import 'package:akgamarra_app/src/features/store-create/screen/create_store_screen.dart';
+import 'package:akgamarra_app/src/features/store-create/screen/selected_tag_create_store_screen.dart';
 import 'package:akgamarra_app/src/side_bar_layout.dart';
 import 'package:go_router/go_router.dart';
 
@@ -20,11 +21,17 @@ final GoRouter router = GoRouter(
         GoRoute(path: '/', builder: (context, state) => HomeScreen()),
         GoRoute(
           path: '/store',
-          builder: (context, state) => const StoreScreen(),
+          builder: (context, state) => const MeStoreScreen(),
         ),
         GoRoute(
           path: '/store-create',
           builder: (context, state) => const CreateStoreScreen(),
+          routes: [
+            GoRoute(
+              path: 'select-tags',
+              builder: (context, state) => SelectedTagsCreateStoreScreen(),
+            ),
+          ],
         ),
       ],
     ),
