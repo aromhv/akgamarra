@@ -5,13 +5,13 @@ part 'store_request.g.dart';
 @JsonSerializable()
 class StoreRequest {
   String name;
-  Set<String> tags;
   String description;
   Map<String, String> legalDocument;
 
+  Set<String>? tags;
+
   StoreRequest({
     required this.name,
-    required this.tags,
     required this.description,
     required this.legalDocument,
   });

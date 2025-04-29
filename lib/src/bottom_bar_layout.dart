@@ -64,7 +64,8 @@ class BottomBarLayoutState extends State<BottomBarLayout> {
                     setState(() {
                       _currentIndex = index;
                     });
-                    context.go(bottomNavItems[index].route!);
+                    final route = bottomNavItems[index].route!;
+                    context.push(route);
                   },
                 ),
       ),

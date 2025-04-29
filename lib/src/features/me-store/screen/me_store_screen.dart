@@ -1,28 +1,24 @@
-import 'package:akgamarra_app/src/core/handler/store_handler.dart';
+import 'package:akgamarra_app/src/core/handler/find_by_id_store_handler.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
-class StoreScreen extends StatelessWidget {
-  const StoreScreen({super.key});
+class MeStoreScreen extends StatelessWidget {
+  const MeStoreScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final storeHandler = context.read<StoreHandler>();
+    final findByIdStoreHandler = context.read<FindByIdStoreHandler>();
     return Scaffold(
       body: Center(
         child: FutureBuilder(
-          future: storeHandler.findById(),
+          future: findByIdStoreHandler.findById(),
           builder: (context, snapshot) {
+            final store = snapshot.data;
             if (snapshot.connectionState == ConnectionState.waiting) {
               return CircularProgressIndicator();
-            } else if (snapshot.hasError) {
-              return Text("Error al cargar la tienda");
-            } else if (!snapshot.hasData || snapshot.data == null) {
-              return Text("No se encontró la tienda");
             }
-
-            final store = snapshot.data;
+            if (snapshot.hasError) context.push("/");
             return Column(
               mainAxisSize: MainAxisSize.min,
               children: [

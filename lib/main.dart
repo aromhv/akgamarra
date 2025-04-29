@@ -1,15 +1,16 @@
 import 'package:akgamarra_app/src/app/router/app_router.dart';
 import 'package:akgamarra_app/src/core/context/auth_context.dart';
-import 'package:akgamarra_app/src/core/handler/load_current_user_handler.dart';
+import 'package:akgamarra_app/src/core/handler/current_user_handler.dart';
+import 'package:akgamarra_app/src/core/handler/find_by_id_store_handler.dart';
 import 'package:akgamarra_app/src/core/handler/login_handler.dart';
-import 'package:akgamarra_app/src/core/handler/store_handler.dart';
+import 'package:akgamarra_app/src/core/handler/retrieve_tags_handler.dart';
+import 'package:akgamarra_app/src/core/handler/save_store_handler.dart';
 import 'package:akgamarra_app/src/core/service/auth_service.dart';
 import 'package:akgamarra_app/src/core/service/socialmedia/google_service.dart';
 import 'package:akgamarra_app/src/core/service/store_service.dart';
 import 'package:dio/dio.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:provider/provider.dart';
@@ -52,17 +53,33 @@ Future<void> main() async {
               ),
         ),
 
-        Provider<LoadCurrentUserHandler>(
+        Provider<CurrentUserHandler>(
           create:
-              (context) => LoadCurrentUserHandler(
+              (context) => CurrentUserHandler(
                 context.read<AuthService>(),
                 context.read<AuthContext>(),
               ),
         ),
 
-        Provider<StoreHandler>(
+        Provider<SaveStoreHandler>(
           create:
-              (context) => StoreHandler(
+              (context) => SaveStoreHandler(
+                context.read<AuthContext>(),
+                context.read<StoreService>(),
+              ),
+        ),
+
+        Provider<RetrieveTagHandler>(
+          create:
+              (context) => RetrieveTagHandler(
+                context.read<AuthContext>(),
+                context.read<StoreService>(),
+              ),
+        ),
+
+        Provider<FindByIdStoreHandler>(
+          create:
+              (context) => FindByIdStoreHandler(
                 context.read<AuthContext>(),
                 context.read<StoreService>(),
               ),
@@ -97,7 +114,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final loadCurrentUserService = Provider.of<LoadCurrentUserHandler>(
+    final loadCurrentUserService = Provider.of<CurrentUserHandler>(
       context,
       listen: false,
     );

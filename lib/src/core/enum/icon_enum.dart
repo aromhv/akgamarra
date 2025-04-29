@@ -5,7 +5,7 @@ enum IconEnum {
   ICON_ARROW_BACK("arrow_back", Icon(Icons.arrow_back)),
   ICON_STOREFRONT("storefront", Icon(Icons.storefront)),
   ICON_ADD("add", Icon(Icons.add)),
-  ICON_STORE("store", Icon(Icons.store)),
+  ICON_STORE("me-store", Icon(Icons.store)),
   ICON_CATEGORY("category", Icon(Icons.category)),
   ICON_LOCALOFFER("local_offer", Icon(Icons.local_offer)),
   ICON_ORDER("order", Icon(Icons.assignment)),

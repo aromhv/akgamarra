@@ -123,7 +123,7 @@ class AccountScreen extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.only(top: 10.0),
                     child: ElevatedButton(
-                      onPressed: () => context.go('/complete-data'),
+                      onPressed: () => context.push('/complete-data'),
                       style: ElevatedButton.styleFrom(
                         backgroundColor: ColorEnum.COLOR_PRINCIPAL.color,
                         foregroundColor: Colors.white,

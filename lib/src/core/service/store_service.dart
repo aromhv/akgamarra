@@ -10,12 +10,7 @@ class StoreService {
 
   Future<StoreResponse?> save(String token, StoreRequest request) async {
     final String METHOD_PATH = '$URL_BASE/save';
-    var options = Options(
-      headers: {
-        "Authorization": "Bearer $token",
-        "content-type": "application/json",
-      },
-    );
+    var options = Options(headers: {"Authorization": "Bearer $token"});
 
     try {
       final response = await dio.post(
@@ -38,6 +33,18 @@ class StoreService {
       return StoreResponse.fromJson(response.data);
     } catch (e, stacktrace) {
       return null;
+    }
+  }
+
+  Future<Set<String>> retrieveTags(String token) async {
+    final String methodPath = '$URL_BASE/metadata/tags';
+    final options = Options(headers: {"Authorization": "Bearer $token"});
+
+    try {
+      final response = await dio.get(methodPath, options: options);
+      return response.data.whereType<String>().toSet();
+    } catch (e, stackTrace) {
+      return <String>{};
     }
   }
 }
