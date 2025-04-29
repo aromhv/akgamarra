@@ -33,6 +33,20 @@ final GoRouter router = GoRouter(
             ),
           ],
         ),
+        GoRoute(
+          path: '/products',
+          builder: (context, state) => const CreateStoreScreen(),
+          routes: [
+            GoRoute(
+              path: '',
+              builder: (context, state) => SelectedTagsCreateStoreScreen(),
+            ),
+            GoRoute(
+              path: '/find-by-id/{id}',
+              builder: (context, state) => SelectedTagsCreateStoreScreen(),
+            ),
+          ],
+        ),
       ],
     ),
     ShellRoute(

@@ -1,20 +1,20 @@
 import 'package:json_annotation/json_annotation.dart';
 
-part 'store_request.g.dart';
+part 'save_store_request.g.dart';
 
 @JsonSerializable()
-class StoreRequest {
+class SaveStoreRequest {
   String name;
   String description;
   Map<String, String> legalDocument;
 
   Set<String>? tags;
 
-  StoreRequest({
+  SaveStoreRequest({
     required this.name,
     required this.description,
     required this.legalDocument,
   });
 
-  Map<String, dynamic> toJson() => _$StoreRequestToJson(this);
+  Map<String, dynamic> toJson() => _$SaveStoreRequestToJson(this);
 }

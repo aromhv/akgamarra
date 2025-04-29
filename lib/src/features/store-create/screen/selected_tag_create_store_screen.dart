@@ -3,7 +3,7 @@ import 'dart:collection';
 import 'package:akgamarra_app/src/core/handler/current_user_handler.dart';
 import 'package:akgamarra_app/src/core/handler/retrieve_tags_handler.dart';
 import 'package:akgamarra_app/src/core/handler/save_store_handler.dart';
-import 'package:akgamarra_app/src/core/model/request/store_request.dart';
+import 'package:akgamarra_app/src/core/model/request/save_store_request.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
@@ -26,7 +26,7 @@ class SelectedTagsCreateStoreScreenState
     final loadCurrentUserHandler = context.read<CurrentUserHandler>();
 
     final state = GoRouterState.of(context);
-    final StoreRequest request = state.extra as StoreRequest;
+    final SaveStoreRequest request = state.extra as SaveStoreRequest;
 
     return Scaffold(
       body: Center(

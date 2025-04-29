@@ -1,4 +1,4 @@
-import 'package:akgamarra_app/src/core/model/request/store_request.dart';
+import 'package:akgamarra_app/src/core/model/request/save_store_request.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -20,12 +20,12 @@ class CreateStoreScreenState extends State<CreateStoreScreen> {
   final TextEditingController _documentNumberController =
       TextEditingController();
 
-  StoreRequest _buildStoreRequest() {
+  SaveStoreRequest _buildStoreRequest() {
     Map<String, String> legalDocument = {
       "documentType": _selectedDocumentType,
       "documentNumber": _documentNumberController.text,
     };
-    return StoreRequest(
+    return SaveStoreRequest(
       name: _nameController.text,
       description: _descriptionController.text,
       legalDocument: legalDocument,

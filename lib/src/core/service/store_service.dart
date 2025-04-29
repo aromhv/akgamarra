@@ -1,4 +1,4 @@
-import 'package:akgamarra_app/src/core/model/request/store_request.dart';
+import 'package:akgamarra_app/src/core/model/request/save_store_request.dart';
 import 'package:akgamarra_app/src/core/model/response/store_response.dart';
 import 'package:dio/dio.dart';
 
@@ -8,7 +8,7 @@ class StoreService {
 
   StoreService({required this.dio});
 
-  Future<StoreResponse?> save(String token, StoreRequest request) async {
+  Future<StoreResponse?> save(String token, SaveStoreRequest request) async {
     final String METHOD_PATH = '$URL_BASE/save';
     var options = Options(headers: {"Authorization": "Bearer $token"});
 

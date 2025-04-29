@@ -3,9 +3,11 @@ import 'package:akgamarra_app/src/core/context/auth_context.dart';
 import 'package:akgamarra_app/src/core/handler/current_user_handler.dart';
 import 'package:akgamarra_app/src/core/handler/find_by_id_store_handler.dart';
 import 'package:akgamarra_app/src/core/handler/login_handler.dart';
+import 'package:akgamarra_app/src/core/handler/retrieve_products_handler.dart';
 import 'package:akgamarra_app/src/core/handler/retrieve_tags_handler.dart';
 import 'package:akgamarra_app/src/core/handler/save_store_handler.dart';
 import 'package:akgamarra_app/src/core/service/auth_service.dart';
+import 'package:akgamarra_app/src/core/service/product_service.dart';
 import 'package:akgamarra_app/src/core/service/socialmedia/google_service.dart';
 import 'package:akgamarra_app/src/core/service/store_service.dart';
 import 'package:dio/dio.dart';
@@ -42,6 +44,7 @@ Future<void> main() async {
 
         Provider<AuthService>(create: (_) => AuthService(dio: dio)),
         Provider<StoreService>(create: (_) => StoreService(dio: dio)),
+        Provider<ProductService>(create: (_) => ProductService(dio: dio)),
         Provider<GoogleService>(create: (_) => GoogleService()),
 
         Provider<LoginHandler>(
@@ -82,6 +85,14 @@ Future<void> main() async {
               (context) => FindByIdStoreHandler(
                 context.read<AuthContext>(),
                 context.read<StoreService>(),
+              ),
+        ),
+
+        Provider<RetrieveProductsHandler>(
+          create:
+              (context) => RetrieveProductsHandler(
+                context.read<AuthContext>(),
+                context.read<ProductService>(),
               ),
         ),
       ],
