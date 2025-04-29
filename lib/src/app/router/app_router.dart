@@ -5,6 +5,7 @@ import 'package:akgamarra_app/src/features/account/screen/create_account_screen.
 import 'package:akgamarra_app/src/features/auth/screen/login_screen.dart';
 import 'package:akgamarra_app/src/features/home/screen/home_screen.dart';
 import 'package:akgamarra_app/src/features/me-store/screen/me_store_screen.dart';
+import 'package:akgamarra_app/src/features/products/screen/products_screen.dart';
 import 'package:akgamarra_app/src/features/store-create/screen/create_store_screen.dart';
 import 'package:akgamarra_app/src/features/store-create/screen/selected_tag_create_store_screen.dart';
 import 'package:akgamarra_app/src/side_bar_layout.dart';
@@ -35,17 +36,8 @@ final GoRouter router = GoRouter(
         ),
         GoRoute(
           path: '/products',
-          builder: (context, state) => const CreateStoreScreen(),
-          routes: [
-            GoRoute(
-              path: '',
-              builder: (context, state) => SelectedTagsCreateStoreScreen(),
-            ),
-            GoRoute(
-              path: '/find-by-id/{id}',
-              builder: (context, state) => SelectedTagsCreateStoreScreen(),
-            ),
-          ],
+          builder: (context, state) => const ProductsScreen(),
+          routes: [],
         ),
       ],
     ),
