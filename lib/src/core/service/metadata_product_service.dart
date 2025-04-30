@@ -1,4 +1,5 @@
 import 'package:akgamarra_app/src/core/model/response/brand_response.dart';
+import 'package:akgamarra_app/src/core/model/response/target_response.dart';
 import 'package:dio/dio.dart';
 
 class MetadataProductService {
@@ -14,6 +15,19 @@ class MetadataProductService {
       final response = await dio.get('$URL_BASE/brands', options: options);
       return (response.data as List)
           .map((item) => BrandResponse.fromJson(item))
+          .toList();
+    } catch (e, stacktrace) {
+      throw Error();
+    }
+  }
+
+  Future<List<TargetResponse>> retrieveTargets(String token) async {
+    var options = Options(headers: {"Authorization": "Bearer $token"});
+
+    try {
+      final response = await dio.get('$URL_BASE/targets', options: options);
+      return (response.data as List)
+          .map((item) => TargetResponse.fromJson(item))
           .toList();
     } catch (e, stacktrace) {
       throw Error();

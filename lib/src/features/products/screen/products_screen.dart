@@ -1,6 +1,9 @@
 import 'dart:developer';
 
 import 'package:akgamarra_app/src/core/handler/retrieve_brands_handler.dart';
+import 'package:akgamarra_app/src/core/handler/retrieve_targets_handler.dart';
+import 'package:akgamarra_app/src/core/model/response/brand_response.dart';
+import 'package:akgamarra_app/src/core/model/response/target_response.dart';
 import 'package:akgamarra_app/src/features/products/widget/filter_products_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -22,6 +25,7 @@ class ProductsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final retrieveBrandsHandler = context.read<RetrieveBrandsHandler>();
+    final retrieveTargetsHandler = context.read<RetrieveTargetsHandler>();
     final items = [
       "GAAAAAA",
       "GAAAAAAGAAAAAAGAAAAAA",
@@ -52,14 +56,21 @@ class ProductsScreen extends StatelessWidget {
           Expanded(
             flex: 3,
             child: FutureBuilder(
-              future: retrieveBrandsHandler.retrieve(),
+              future: Future.wait([
+                retrieveBrandsHandler.retrieve(),
+                retrieveTargetsHandler.retrieve(),
+              ]),
               builder: (context, snapshot) {
-                final brands = snapshot.data;
+                final brands = snapshot.data![0] as List<BrandResponse>;
+                final targets = snapshot.data![1] as List<TargetResponse>;
                 return FilterProductsWidget(
                   brands: brands,
+                  targets: targets,
                   onChangedBrand: (brandSelected) {
-                    log("GAAAAAAA");
                     log(brandSelected!);
+                  },
+                  onChangedTarget: (targetSelected) {
+                    log(targetSelected!);
                   },
                 );
               },

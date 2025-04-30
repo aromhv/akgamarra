@@ -6,6 +6,7 @@ import 'package:akgamarra_app/src/core/handler/login_handler.dart';
 import 'package:akgamarra_app/src/core/handler/retrieve_brands_handler.dart';
 import 'package:akgamarra_app/src/core/handler/retrieve_products_handler.dart';
 import 'package:akgamarra_app/src/core/handler/retrieve_tags_handler.dart';
+import 'package:akgamarra_app/src/core/handler/retrieve_targets_handler.dart';
 import 'package:akgamarra_app/src/core/handler/save_store_handler.dart';
 import 'package:akgamarra_app/src/core/service/auth_service.dart';
 import 'package:akgamarra_app/src/core/service/metadata_product_service.dart';
@@ -104,6 +105,14 @@ Future<void> main() async {
         Provider<RetrieveBrandsHandler>(
           create:
               (context) => RetrieveBrandsHandler(
+                context.read<AuthContext>(),
+                context.read<MetadataProductService>(),
+              ),
+        ),
+
+        Provider<RetrieveTargetsHandler>(
+          create:
+              (context) => RetrieveTargetsHandler(
                 context.read<AuthContext>(),
                 context.read<MetadataProductService>(),
               ),
