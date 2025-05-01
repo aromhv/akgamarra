@@ -8,7 +8,7 @@ class RetrieveTargetsHandler {
 
   RetrieveTargetsHandler(this.authState, this.storeService);
 
-  Future<List<TargetResponse>?> retrieve() async {
+  Future<List<TargetResponse>> retrieve() async {
     var token = authState.token;
     return await storeService.retrieveTargets(token!);
   }

@@ -55,7 +55,7 @@ class BottomBarLayoutState extends State<BottomBarLayout> {
                 ? null
                 : DrawerWidget(sideBarItems: sideBarItems),
         bottomNavigationBar:
-            bottomNavItems.isEmpty
+            (bottomNavItems.isEmpty || bottomNavItems.length < 2)
                 ? null
                 : BottomBarWidget(
                   bottomNavItems: bottomNavItems,

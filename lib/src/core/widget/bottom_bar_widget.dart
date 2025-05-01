@@ -20,6 +20,7 @@ class BottomBarWidget extends StatelessWidget {
     BottomNavigationBarItem toItem(NavResponse nav) {
       return BottomNavigationBarItem(
         label: nav.label,
+        backgroundColor: ColorEnum.COLOR_PRINCIPAL.color,
         icon: IconEnum.findIconByName(nav.icon),
       );
     }

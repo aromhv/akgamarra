@@ -1,4 +1,5 @@
 import 'package:akgamarra_app/src/core/model/response/brand_response.dart';
+import 'package:akgamarra_app/src/core/model/response/category_response.dart';
 import 'package:akgamarra_app/src/core/model/response/target_response.dart';
 import 'package:dio/dio.dart';
 
@@ -28,6 +29,33 @@ class MetadataProductService {
       final response = await dio.get('$URL_BASE/targets', options: options);
       return (response.data as List)
           .map((item) => TargetResponse.fromJson(item))
+          .toList();
+    } catch (e, stacktrace) {
+      throw Error();
+    }
+  }
+
+  Future<List<CategoryResponse>> retrieveCategories(
+    String token,
+    String? target,
+  ) async {
+    Map<String, dynamic> headers;
+    if (target != null) {
+      headers = {
+        "target": Uri.encodeComponent(target),
+        "Authorization": "Bearer $token",
+      };
+    } else {
+      headers = {"Authorization": "Bearer $token"};
+    }
+
+    try {
+      final response = await dio.get(
+        '$URL_BASE/category',
+        options: Options(headers: headers),
+      );
+      return (response.data as List)
+          .map((item) => CategoryResponse.fromJson(item))
           .toList();
     } catch (e, stacktrace) {
       throw Error();
