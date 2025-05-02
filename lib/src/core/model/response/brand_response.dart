@@ -13,4 +13,6 @@ class BrandResponse {
       _$BrandResponseFromJson(json);
 
   Map<String, dynamic> toJson() => _$BrandResponseToJson(this);
+
+  Map<String, String> toMap() => <String, String>{'key': name, 'value': name};
 }

@@ -13,4 +13,6 @@ class TargetResponse {
       _$TargetResponseFromJson(json);
 
   Map<String, dynamic> toJson() => _$TargetResponseToJson(this);
+
+  Map<String, String> toMap() => <String, String>{'key': key, 'value': value};
 }

@@ -1,5 +1,10 @@
+import 'dart:developer';
+
 import 'package:akgamarra_app/src/core/enum/color_enum.dart';
 import 'package:akgamarra_app/src/core/enum/icon_enum.dart';
+import 'package:akgamarra_app/src/core/widget/modal/modal_utils.dart';
+import 'package:akgamarra_app/src/features/products/widget/card_product_widget.dart';
+import 'package:akgamarra_app/src/features/products/widget/modal/filter_products_modal_widget.dart';
 import 'package:flutter/material.dart';
 
 class ProductsScreen extends StatefulWidget {
@@ -9,63 +14,10 @@ class ProductsScreen extends StatefulWidget {
   State<ProductsScreen> createState() => _ProductsScreenState();
 }
 
-/*
-* ToDo: Que se enfoque solo en mostrar y paginar productos
-* ToDo: Boton para mostrar los filtros de busqueda... boton para ir a la pagina de creacion de productos.
-* */
 class _ProductsScreenState extends State<ProductsScreen> {
-  /*
-  late final RetrieveBrandsHandler _retrieveBrandsHandler;
-  late final RetrieveTargetsHandler _retrieveTargetsHandler;
-  late final RetrieveCategoriesHandler _retrieveCategoriesHandler;
-
-  List<BrandResponse> _brands = [];
-  List<TargetResponse> _targets = [];
-  List<CategoryResponse> _categories = [];
-
-  bool _isLoadingCategories = false;
-
-  final bool _isLoadingInitial = true;
-   */
-
-  /*
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    _retrieveBrandsHandler = context.read<RetrieveBrandsHandler>();
-    _retrieveTargetsHandler = context.read<RetrieveTargetsHandler>();
-    _retrieveCategoriesHandler = context.read<RetrieveCategoriesHandler>();
-
-    _loadInitialData();
-  }
-
-  Future<void> _loadInitialData() async {
-    final brands = await _retrieveBrandsHandler.retrieve();
-    final targets = await _retrieveTargetsHandler.retrieve();
-    setState(() {
-      _brands = brands;
-      _targets = targets;
-      _isLoadingInitial = false;
-    });
-  }
-
-  Future<void> _onTargetChanged(String? targetId) async {
-    setState(() {
-      _isLoadingCategories = true;
-      _categories = [];
-    });
-
-    final categories = await _retrieveCategoriesHandler.retrieve(targetId);
-    setState(() {
-      _categories = categories;
-      _isLoadingCategories = false;
-    });
-  }
-   */
-
   @override
   Widget build(BuildContext context) {
-    List<String> items = [
+    List<String> products = [
       " xd",
       "a",
       "dsdsds",
@@ -75,6 +27,12 @@ class _ProductsScreenState extends State<ProductsScreen> {
       "2",
       "3",
     ];
+
+    List<CardProductWidget> productsToItem(List<String> products) {
+      return products
+          .map((String product) => CardProductWidget(item: product))
+          .toList();
+    }
 
     return Stack(
       children: [
@@ -94,7 +52,7 @@ class _ProductsScreenState extends State<ProductsScreen> {
                       mainAxisSpacing: 8,
                       padding: EdgeInsets.zero,
                       physics: const BouncingScrollPhysics(),
-                      children: items.map(_buildItem).toList(),
+                      children: productsToItem(products),
                     ),
                   ),
                 ),
@@ -110,7 +68,9 @@ class _ProductsScreenState extends State<ProductsScreen> {
               FloatingActionButton(
                 backgroundColor: ColorEnum.COLOR_SELECTED.color,
                 heroTag: "btn1",
-                onPressed: () {},
+                onPressed: () {
+                  showFilteredModal();
+                },
                 child: IconEnum.ICON_SEARCH.icon,
               ),
               const SizedBox(width: 12),
@@ -127,36 +87,29 @@ class _ProductsScreenState extends State<ProductsScreen> {
     );
   }
 
-  Widget _buildItem(String item) {
-    return Container(
-      decoration: BoxDecoration(
-        color: Colors.teal,
-        borderRadius: BorderRadius.circular(12),
+  showFilteredModal() {
+    showCustomModal(
+      context: context,
+      title: 'Busqueda de productos',
+      content: FilterProductsModalWidget(
+        onChanged: (filters) {
+          log("filters");
+        },
       ),
-      alignment: Alignment.center,
-      child: Text(
-        item,
-        style: const TextStyle(color: Colors.white, fontSize: 18),
-      ),
+      actions: [
+        TextButton(
+          onPressed: () {
+            Navigator.of(context, rootNavigator: true).pop();
+          },
+          child: const Text('Cancelar'),
+        ),
+        TextButton(
+          onPressed: () {
+            //
+          },
+          child: const Text('Aceptar'),
+        ),
+      ],
     );
   }
 }
-
-/*
-Expanded(
-                    flex: 3,
-                    child: FilterProductsWidget(
-                      brands: _brands,
-                      targets: _targets,
-                      categories: _categories,
-                      loadingCategories: _isLoadingCategories,
-                      onChangedBrand: (brand) => {},
-                      onChangedCategories: (cat) => {},
-                      onChangedTarget: _onTargetChanged,
-                    ),
-                  ),
-                  Expanded(
-                    flex: 1,
-                    child: Container(child: Text("Crear un nuevo producto")),
-                  ),
- */
