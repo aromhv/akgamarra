@@ -1,12 +1,6 @@
-import 'package:akgamarra_app/src/core/handler/retrieve_brands_handler.dart';
-import 'package:akgamarra_app/src/core/handler/retrieve_categories_handler.dart';
-import 'package:akgamarra_app/src/core/handler/retrieve_targets_handler.dart';
-import 'package:akgamarra_app/src/core/model/response/brand_response.dart';
-import 'package:akgamarra_app/src/core/model/response/category_response.dart';
-import 'package:akgamarra_app/src/core/model/response/target_response.dart';
-import 'package:akgamarra_app/src/features/products/widget/filter_products_widget.dart';
+import 'package:akgamarra_app/src/core/enum/color_enum.dart';
+import 'package:akgamarra_app/src/core/enum/icon_enum.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 class ProductsScreen extends StatefulWidget {
   const ProductsScreen({super.key});
@@ -20,6 +14,7 @@ class ProductsScreen extends StatefulWidget {
 * ToDo: Boton para mostrar los filtros de busqueda... boton para ir a la pagina de creacion de productos.
 * */
 class _ProductsScreenState extends State<ProductsScreen> {
+  /*
   late final RetrieveBrandsHandler _retrieveBrandsHandler;
   late final RetrieveTargetsHandler _retrieveTargetsHandler;
   late final RetrieveCategoriesHandler _retrieveCategoriesHandler;
@@ -28,9 +23,12 @@ class _ProductsScreenState extends State<ProductsScreen> {
   List<TargetResponse> _targets = [];
   List<CategoryResponse> _categories = [];
 
-  bool _isLoadingInitial = true;
   bool _isLoadingCategories = false;
 
+  final bool _isLoadingInitial = true;
+   */
+
+  /*
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
@@ -63,6 +61,7 @@ class _ProductsScreenState extends State<ProductsScreen> {
       _isLoadingCategories = false;
     });
   }
+   */
 
   @override
   Widget build(BuildContext context) {
@@ -77,45 +76,54 @@ class _ProductsScreenState extends State<ProductsScreen> {
       "3",
     ];
 
-    return Padding(
-      padding: const EdgeInsets.all(8),
-      child:
-          _isLoadingInitial
-              ? const Center(child: CircularProgressIndicator())
-              : Column(
-                children: [
-                  Expanded(
-                    flex: 6,
-                    child: Align(
-                      alignment: Alignment.topCenter,
-                      child: GridView.count(
-                        crossAxisCount: 2,
-                        crossAxisSpacing: 8,
-                        mainAxisSpacing: 8,
-                        padding: EdgeInsets.zero,
-                        physics: const BouncingScrollPhysics(),
-                        children: items.map(_buildItem).toList(),
-                      ),
+    return Stack(
+      children: [
+        Container(
+          color: ColorEnum.COLOR_SELECTED.color,
+          child: Padding(
+            padding: const EdgeInsets.all(8),
+            child: Column(
+              children: [
+                Expanded(
+                  flex: 10,
+                  child: Align(
+                    alignment: Alignment.topCenter,
+                    child: GridView.count(
+                      crossAxisCount: 2,
+                      crossAxisSpacing: 8,
+                      mainAxisSpacing: 8,
+                      padding: EdgeInsets.zero,
+                      physics: const BouncingScrollPhysics(),
+                      children: items.map(_buildItem).toList(),
                     ),
                   ),
-                  Expanded(
-                    flex: 3,
-                    child: FilterProductsWidget(
-                      brands: _brands,
-                      targets: _targets,
-                      categories: _categories,
-                      loadingCategories: _isLoadingCategories,
-                      onChangedBrand: (brand) => {},
-                      onChangedCategories: (cat) => {},
-                      onChangedTarget: _onTargetChanged,
-                    ),
-                  ),
-                  Expanded(
-                    flex: 1,
-                    child: Container(child: Text("Crear un nuevo producto")),
-                  ),
-                ],
+                ),
+              ],
+            ),
+          ),
+        ),
+        Positioned(
+          bottom: 16,
+          right: 16,
+          child: Row(
+            children: [
+              FloatingActionButton(
+                backgroundColor: ColorEnum.COLOR_SELECTED.color,
+                heroTag: "btn1",
+                onPressed: () {},
+                child: IconEnum.ICON_SEARCH.icon,
               ),
+              const SizedBox(width: 12),
+              FloatingActionButton(
+                backgroundColor: ColorEnum.COLOR_SELECTED.color,
+                heroTag: "btn2",
+                onPressed: () {},
+                child: IconEnum.ICON_ADD.icon,
+              ),
+            ],
+          ),
+        ),
+      ],
     );
   }
 
@@ -133,3 +141,22 @@ class _ProductsScreenState extends State<ProductsScreen> {
     );
   }
 }
+
+/*
+Expanded(
+                    flex: 3,
+                    child: FilterProductsWidget(
+                      brands: _brands,
+                      targets: _targets,
+                      categories: _categories,
+                      loadingCategories: _isLoadingCategories,
+                      onChangedBrand: (brand) => {},
+                      onChangedCategories: (cat) => {},
+                      onChangedTarget: _onTargetChanged,
+                    ),
+                  ),
+                  Expanded(
+                    flex: 1,
+                    child: Container(child: Text("Crear un nuevo producto")),
+                  ),
+ */
