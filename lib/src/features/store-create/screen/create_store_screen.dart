@@ -17,19 +17,11 @@ class CreateStoreScreenState extends State<CreateStoreScreen> {
 
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _descriptionController = TextEditingController();
-  final TextEditingController _documentNumberController =
-      TextEditingController();
+  final TextEditingController _documentNumberController = TextEditingController();
 
   SaveStoreRequest _buildStoreRequest() {
-    Map<String, String> legalDocument = {
-      "documentType": _selectedDocumentType,
-      "documentNumber": _documentNumberController.text,
-    };
-    return SaveStoreRequest(
-      name: _nameController.text,
-      description: _descriptionController.text,
-      legalDocument: legalDocument,
-    );
+    Map<String, String> legalDocument = {"documentType": _selectedDocumentType, "documentNumber": _documentNumberController.text};
+    return SaveStoreRequest(name: _nameController.text, description: _descriptionController.text, legalDocument: legalDocument);
   }
 
   @override
@@ -74,10 +66,7 @@ class CreateStoreScreenState extends State<CreateStoreScreen> {
               ElevatedButton(
                 onPressed: () async {
                   if (_formKey.currentState!.validate()) {
-                    context.push(
-                      '/store-create/select-tags',
-                      extra: _buildStoreRequest(),
-                    );
+                    context.push('/store-create/select-tags', extra: _buildStoreRequest());
                   }
                 },
                 child: Text('Contiuar'),

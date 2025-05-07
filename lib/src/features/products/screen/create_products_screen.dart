@@ -1,6 +1,7 @@
 import 'package:akgamarra_app/src/core/enum/color_enum.dart';
 import 'package:akgamarra_app/src/core/handler/create_products_handler.dart';
 import 'package:akgamarra_app/src/core/model/request/save_product_request.dart';
+import 'package:akgamarra_app/src/core/widget/button_widget.dart';
 import 'package:akgamarra_app/src/core/widget/input_number_widget.dart';
 import 'package:akgamarra_app/src/core/widget/input_text_widget.dart';
 import 'package:akgamarra_app/src/core/widget/modal/modal_utils.dart';
@@ -21,15 +22,7 @@ class _CreateProductsScreenState extends State<CreateProductsScreen> {
   final double _defaultItemsSpace = 12.5;
   final _formKey = GlobalKey<FormState>();
 
-  SaveProductRequest request = SaveProductRequest(
-    name: "",
-    brand: "",
-    target: "",
-    displayPrice: 0,
-    imageUrl: "any",
-    description: "",
-    category: "",
-  );
+  SaveProductRequest request = SaveProductRequest(name: "", brand: "", target: "", displayPrice: 0, imageUrl: "any", description: "", category: "");
 
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _descriptionController = TextEditingController();
@@ -53,11 +46,7 @@ class _CreateProductsScreenState extends State<CreateProductsScreen> {
                 key: _formKey,
                 child: Column(
                   children: [
-                    InputTextWidget(
-                      enabled: true,
-                      labelText: 'Nombre',
-                      controller: _nameController,
-                    ),
+                    InputTextWidget(enabled: true, labelText: 'Nombre', controller: _nameController),
                     SizedBox(height: _defaultItemsSpace),
                     TextFormField(
                       minLines: 1,
@@ -68,34 +57,13 @@ class _CreateProductsScreenState extends State<CreateProductsScreen> {
                       validator: (value) => value!.isEmpty ? 'Requerido' : null,
                     ),
                     SizedBox(height: _defaultItemsSpace),
-                    InputNumberWidget(
-                      labelText: "Precio a mostrar",
-                      controller: _displayPriceController,
-                    ),
+                    InputNumberWidget(labelText: "Precio a mostrar", controller: _displayPriceController),
                     SizedBox(height: _defaultItemsSpace),
                     Row(
                       children: [
-                        Expanded(
-                          child: InputTextWidget(
-                            enabled: false,
-                            labelText: 'Marca',
-                            controller: _brandController,
-                          ),
-                        ),
-                        Expanded(
-                          child: InputTextWidget(
-                            enabled: false,
-                            labelText: 'Género',
-                            controller: _targetController,
-                          ),
-                        ),
-                        Expanded(
-                          child: InputTextWidget(
-                            enabled: false,
-                            labelText: 'Categoría',
-                            controller: _categoryController,
-                          ),
-                        ),
+                        Expanded(child: InputTextWidget(enabled: false, labelText: 'Marca', controller: _brandController)),
+                        Expanded(child: InputTextWidget(enabled: false, labelText: 'Género', controller: _targetController)),
+                        Expanded(child: InputTextWidget(enabled: false, labelText: 'Categoría', controller: _categoryController)),
                       ],
                     ),
                     SizedBox(height: _defaultItemsSpace),
@@ -106,10 +74,7 @@ class _CreateProductsScreenState extends State<CreateProductsScreen> {
                           return SizedBox(
                             width: 24,
                             height: 24,
-                            child: CircularProgressIndicator(
-                              color: ColorEnum.COLOR_PRINCIPAL.color,
-                              strokeWidth: 2,
-                            ),
+                            child: CircularProgressIndicator(color: ColorEnum.COLOR_PRINCIPAL.color, strokeWidth: 2),
                           );
                         }
 
@@ -160,19 +125,28 @@ class _CreateProductsScreenState extends State<CreateProductsScreen> {
         },
       ),
       actions: [
-        TextButton(
-          onPressed: () {
-            Navigator.of(context, rootNavigator: true).pop();
-          },
-          child: const Text('Cancelar'),
-        ),
-        TextButton(
-          onPressed: () {
-            if (request.isValid()) {
+        Expanded(
+          child: ButtonWidget(
+            onPressed: () {
               Navigator.of(context, rootNavigator: true).pop();
-            }
-          },
-          child: const Text('Aceptar'),
+            },
+            buttonColor: ColorEnum.COLOR_SELECTED.color,
+            labelColor: ColorEnum.COLOR_PRINCIPAL.color,
+            label: "Cancelar",
+          ),
+        ),
+        SizedBox(width: 10),
+        Expanded(
+          child: ButtonWidget(
+            onPressed: () {
+              if (request.isValid()) {
+                Navigator.of(context, rootNavigator: true).pop();
+              }
+            },
+            buttonColor: ColorEnum.COLOR_PRINCIPAL.color,
+            labelColor: ColorEnum.COLOR_SELECTED.color,
+            label: "Aceptar",
+          ),
         ),
       ],
     );

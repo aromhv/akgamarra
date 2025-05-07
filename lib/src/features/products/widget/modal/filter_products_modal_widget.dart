@@ -15,8 +15,7 @@ class FilterProductsModalWidget extends StatefulWidget {
   const FilterProductsModalWidget({super.key, required this.onChanged});
 
   @override
-  State<FilterProductsModalWidget> createState() =>
-      FilterProductsModalWidgetState();
+  State<FilterProductsModalWidget> createState() => FilterProductsModalWidgetState();
 }
 
 class FilterProductsModalWidgetState extends State<FilterProductsModalWidget> {
@@ -66,11 +65,7 @@ class FilterProductsModalWidgetState extends State<FilterProductsModalWidget> {
     });
   }
 
-  ProductFilterDto get currentFilter => ProductFilterDto(
-    brand: _selectedBrand,
-    target: _selectedTarget,
-    category: _selectedCategory,
-  );
+  ProductFilterDto get currentFilter => ProductFilterDto(brand: _selectedBrand, target: _selectedTarget, category: _selectedCategory);
 
   void _emitChanges() {
     widget.onChanged(currentFilter);
@@ -82,7 +77,6 @@ class FilterProductsModalWidgetState extends State<FilterProductsModalWidget> {
       padding: const EdgeInsets.all(8),
       child: SingleChildScrollView(
         child: Column(
-          spacing: 12,
           children: [
             DropdownWidget(
               title: "Selecciona una marca",
@@ -96,8 +90,7 @@ class FilterProductsModalWidgetState extends State<FilterProductsModalWidget> {
             ),
             DropdownWidget(
               title: "Selecciona un genero",
-              items:
-                  _targets.map((TargetResponse item) => item.toMap()).toList(),
+              items: _targets.map((TargetResponse item) => item.toMap()).toList(),
               onChanged: (target) {
                 setState(() {
                   _selectedTarget = target!;
@@ -110,10 +103,7 @@ class FilterProductsModalWidgetState extends State<FilterProductsModalWidget> {
                 ? const CircularProgressIndicator()
                 : DropdownWidget(
                   title: "Selecciona una categoria",
-                  items:
-                      _categories
-                          .map((CategoryResponse item) => item.toMap())
-                          .toList(),
+                  items: _categories.map((CategoryResponse item) => item.toMap()).toList(),
                   onChanged: (category) {
                     setState(() {
                       _selectedCategory = category!;

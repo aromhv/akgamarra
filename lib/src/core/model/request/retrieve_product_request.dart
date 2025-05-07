@@ -9,12 +9,9 @@ class RetrieveProductRequest {
   String category;
   String target;
 
-  RetrieveProductRequest({
-    required this.page,
-    required this.items,
-    required this.target,
-    required this.category,
-  });
+  RetrieveProductRequest({required this.page, required this.items, required this.target, required this.category});
 
   Map<String, dynamic> toJson() => _$RetrieveProductRequestToJson(this);
+
+  bool isValid() => (target != "") && (category != "");
 }

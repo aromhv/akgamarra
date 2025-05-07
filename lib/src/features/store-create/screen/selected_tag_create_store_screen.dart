@@ -12,12 +12,10 @@ class SelectedTagsCreateStoreScreen extends StatefulWidget {
   const SelectedTagsCreateStoreScreen({super.key});
 
   @override
-  SelectedTagsCreateStoreScreenState createState() =>
-      SelectedTagsCreateStoreScreenState();
+  SelectedTagsCreateStoreScreenState createState() => SelectedTagsCreateStoreScreenState();
 }
 
-class SelectedTagsCreateStoreScreenState
-    extends State<SelectedTagsCreateStoreScreen> {
+class SelectedTagsCreateStoreScreenState extends State<SelectedTagsCreateStoreScreen> {
   final Set<String> selectedTags = HashSet();
 
   @override
@@ -54,9 +52,7 @@ class SelectedTagsCreateStoreScreenState
                             selected: selectedTags.contains(tag),
                             onSelected: (selected) {
                               setState(() {
-                                selected
-                                    ? selectedTags.add(tag)
-                                    : selectedTags.remove(tag);
+                                selected ? selectedTags.add(tag) : selectedTags.remove(tag);
                               });
                             },
                           );
@@ -80,14 +76,7 @@ class SelectedTagsCreateStoreScreenState
                       valueListenable: storeHandler.isSaving,
                       builder: (context, isSaving, child) {
                         return isSaving
-                            ? SizedBox(
-                              width: 24,
-                              height: 24,
-                              child: CircularProgressIndicator(
-                                color: Colors.white,
-                                strokeWidth: 2,
-                              ),
-                            )
+                            ? SizedBox(width: 24, height: 24, child: CircularProgressIndicator(color: Colors.white, strokeWidth: 2))
                             : Text('Guardar');
                       },
                     ),
