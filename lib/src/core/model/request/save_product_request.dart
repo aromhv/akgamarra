@@ -5,11 +5,13 @@ part 'save_product_request.g.dart';
 @JsonSerializable()
 class SaveProductRequest {
   String name;
+  String description;
+  double displayPrice;
+
+  String imageUrl;
+
   String brand;
   String target;
-  double displayPrice;
-  String imageUrl;
-  String description;
   String category;
 
   SaveProductRequest({
@@ -23,4 +25,6 @@ class SaveProductRequest {
   });
 
   Map<String, dynamic> toJson() => _$SaveProductRequestToJson(this);
+
+  bool isValid() => (brand != "") && (target != "") && (category != "");
 }

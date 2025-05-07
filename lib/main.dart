@@ -1,5 +1,6 @@
 import 'package:akgamarra_app/src/app/router/app_router.dart';
 import 'package:akgamarra_app/src/core/context/auth_context.dart';
+import 'package:akgamarra_app/src/core/handler/create_products_handler.dart';
 import 'package:akgamarra_app/src/core/handler/current_user_handler.dart';
 import 'package:akgamarra_app/src/core/handler/find_by_id_store_handler.dart';
 import 'package:akgamarra_app/src/core/handler/login_handler.dart';
@@ -124,6 +125,14 @@ Future<void> main() async {
               (context) => RetrieveCategoriesHandler(
                 context.read<AuthContext>(),
                 context.read<MetadataProductService>(),
+              ),
+        ),
+
+        Provider<CreateProductsHandler>(
+          create:
+              (context) => CreateProductsHandler(
+                context.read<AuthContext>(),
+                context.read<ProductService>(),
               ),
         ),
       ],

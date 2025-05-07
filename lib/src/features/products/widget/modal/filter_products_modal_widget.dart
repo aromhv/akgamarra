@@ -22,9 +22,9 @@ class FilterProductsModalWidget extends StatefulWidget {
 class FilterProductsModalWidgetState extends State<FilterProductsModalWidget> {
   bool _isLoadingCategories = false;
 
-  String? _selectedBrand;
-  String? _selectedTarget;
-  String? _selectedCategory;
+  String _selectedBrand = "";
+  String _selectedTarget = "";
+  String _selectedCategory = "";
 
   List<BrandResponse> _brands = [];
   List<TargetResponse> _targets = [];
@@ -89,7 +89,7 @@ class FilterProductsModalWidgetState extends State<FilterProductsModalWidget> {
               items: _brands.map((BrandResponse item) => item.toMap()).toList(),
               onChanged: (brand) {
                 setState(() {
-                  _selectedBrand = brand;
+                  _selectedBrand = brand!;
                 });
                 _emitChanges();
               },
@@ -100,7 +100,7 @@ class FilterProductsModalWidgetState extends State<FilterProductsModalWidget> {
                   _targets.map((TargetResponse item) => item.toMap()).toList(),
               onChanged: (target) {
                 setState(() {
-                  _selectedTarget = target;
+                  _selectedTarget = target!;
                 });
                 _onTargetChanged(target);
                 _emitChanges();
@@ -116,7 +116,7 @@ class FilterProductsModalWidgetState extends State<FilterProductsModalWidget> {
                           .toList(),
                   onChanged: (category) {
                     setState(() {
-                      _selectedCategory = category;
+                      _selectedCategory = category!;
                     });
                     _emitChanges();
                   },

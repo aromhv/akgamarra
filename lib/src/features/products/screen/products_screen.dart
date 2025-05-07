@@ -6,6 +6,7 @@ import 'package:akgamarra_app/src/core/widget/modal/modal_utils.dart';
 import 'package:akgamarra_app/src/features/products/widget/card_product_widget.dart';
 import 'package:akgamarra_app/src/features/products/widget/modal/filter_products_modal_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class ProductsScreen extends StatefulWidget {
   const ProductsScreen({super.key});
@@ -68,16 +69,14 @@ class _ProductsScreenState extends State<ProductsScreen> {
               FloatingActionButton(
                 backgroundColor: ColorEnum.COLOR_SELECTED.color,
                 heroTag: "btn1",
-                onPressed: () {
-                  showFilteredModal();
-                },
+                onPressed: () => showFilteredModal(),
                 child: IconEnum.ICON_SEARCH.icon,
               ),
               const SizedBox(width: 12),
               FloatingActionButton(
                 backgroundColor: ColorEnum.COLOR_SELECTED.color,
                 heroTag: "btn2",
-                onPressed: () {},
+                onPressed: () => context.push("/products/create"),
                 child: IconEnum.ICON_ADD.icon,
               ),
             ],
@@ -98,9 +97,7 @@ class _ProductsScreenState extends State<ProductsScreen> {
       ),
       actions: [
         TextButton(
-          onPressed: () {
-            Navigator.of(context, rootNavigator: true).pop();
-          },
+          onPressed: () => Navigator.of(context, rootNavigator: true).pop(),
           child: const Text('Cancelar'),
         ),
         TextButton(

@@ -1,7 +1,11 @@
 class ProductFilterDto {
-  final String? brand;
-  final String? target;
-  final String? category;
+  final String brand;
+  final String target;
+  final String category;
 
-  ProductFilterDto({this.brand, this.target, this.category});
+  ProductFilterDto({
+    required this.brand,
+    required this.target,
+    required this.category,
+  });
 }
