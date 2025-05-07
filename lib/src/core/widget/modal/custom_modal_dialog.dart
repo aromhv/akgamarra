@@ -5,12 +5,7 @@ class CustomModalDialog extends StatelessWidget {
   final Widget content;
   final List<Widget> actions;
 
-  const CustomModalDialog({
-    super.key,
-    required this.title,
-    required this.content,
-    required this.actions,
-  });
+  const CustomModalDialog({super.key, required this.title, required this.content, required this.actions});
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +22,7 @@ class CustomModalDialog extends StatelessWidget {
             const SizedBox(height: 16),
             content,
             const SizedBox(height: 24),
-            Row(mainAxisAlignment: MainAxisAlignment.end, children: actions),
+            Row(children: actions),
           ],
         ),
       ),

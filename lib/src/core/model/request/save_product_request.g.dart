@@ -20,10 +20,10 @@ SaveProductRequest _$SaveProductRequestFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$SaveProductRequestToJson(SaveProductRequest instance) =>
     <String, dynamic>{
       'name': instance.name,
-      'brand': instance.brand,
-      'target': instance.target,
+      'description': instance.description,
       'displayPrice': instance.displayPrice,
       'imageUrl': instance.imageUrl,
-      'description': instance.description,
+      'brand': instance.brand,
+      'target': instance.target,
       'category': instance.category,
     };

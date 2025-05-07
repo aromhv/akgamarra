@@ -36,9 +36,9 @@ class MetadataProductService {
   }
 
   Future<List<CategoryResponse>> retrieveCategories(
-    String token,
-    String? target,
-  ) async {
+      String token,
+      String? target,
+      ) async {
     Map<String, dynamic> headers;
     if (target != null) {
       headers = {"target": target, "Authorization": "Bearer $token"};

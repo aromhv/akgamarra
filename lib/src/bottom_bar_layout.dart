@@ -22,12 +22,7 @@ class BottomBarLayoutState extends State<BottomBarLayout> {
 
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setSystemUIOverlayStyle(
-      SystemUiOverlayStyle(
-        statusBarColor: Colors.transparent,
-        statusBarIconBrightness: Brightness.light,
-      ),
-    );
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(statusBarColor: Colors.transparent, statusBarIconBrightness: Brightness.light));
 
     final authContext = context.watch<AuthContext>();
     final user = authContext.user;
@@ -44,16 +39,8 @@ class BottomBarLayoutState extends State<BottomBarLayout> {
       child: Scaffold(
         extendBodyBehindAppBar: true,
         appBar: HeaderWidget(),
-        body: Container(
-          padding: EdgeInsets.only(
-            top: MediaQuery.of(context).padding.top + kToolbarHeight,
-          ),
-          child: widget.child,
-        ),
-        endDrawer:
-            sideBarItems.isEmpty
-                ? null
-                : DrawerWidget(sideBarItems: sideBarItems),
+        body: Container(padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top + kToolbarHeight), child: widget.child),
+        endDrawer: sideBarItems.isEmpty ? null : DrawerWidget(sideBarItems: sideBarItems),
         bottomNavigationBar:
             (bottomNavItems.isEmpty || bottomNavItems.length < 2)
                 ? null

@@ -12,9 +12,7 @@ class RetrieveProductsHandler {
 
   RetrieveProductsHandler(this.authState, this.productService);
 
-  Future<RetrieveProductsResponse> retrieve(
-    RetrieveProductRequest request,
-  ) async {
+  Future<RetrieveProductsResponse> retrieve(RetrieveProductRequest request) async {
     isLoading.value = true;
     try {
       var token = authState.token;

@@ -15,6 +15,7 @@ import 'package:akgamarra_app/src/core/service/metadata_product_service.dart';
 import 'package:akgamarra_app/src/core/service/product_service.dart';
 import 'package:akgamarra_app/src/core/service/socialmedia/google_service.dart';
 import 'package:akgamarra_app/src/core/service/store_service.dart';
+import 'package:akgamarra_app/src/core/widget/circular_progress_widget.dart';
 import 'package:dio/dio.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -24,8 +25,7 @@ import 'package:provider/provider.dart';
 
 import 'src/core/option/firebase_options.dart';
 
-final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
-    FlutterLocalNotificationsPlugin();
+final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -34,9 +34,7 @@ Future<void> main() async {
   const androidInit = AndroidInitializationSettings('@mipmap/ic_launcher');
   const initSettings = InitializationSettings(android: androidInit);
   await flutterLocalNotificationsPlugin.initialize(initSettings);
-  FirebaseMessaging.onMessage.listen(
-    (RemoteMessage message) => showNotification(message),
-  );
+  FirebaseMessaging.onMessage.listen((RemoteMessage message) => showNotification(message));
 
   final dio = Dio();
 
@@ -50,91 +48,36 @@ Future<void> main() async {
         Provider<AuthService>(create: (_) => AuthService(dio: dio)),
         Provider<StoreService>(create: (_) => StoreService(dio: dio)),
         Provider<ProductService>(create: (_) => ProductService(dio: dio)),
-        Provider<MetadataProductService>(
-          create: (_) => MetadataProductService(dio: dio),
-        ),
+        Provider<MetadataProductService>(create: (_) => MetadataProductService(dio: dio)),
         Provider<GoogleService>(create: (_) => GoogleService()),
 
         Provider<LoginHandler>(
-          create:
-              (context) => LoginHandler(
-                context.read<AuthService>(),
-                context.read<GoogleService>(),
-                context.read<AuthContext>(),
-              ),
+          create: (context) => LoginHandler(context.read<AuthService>(), context.read<GoogleService>(), context.read<AuthContext>()),
         ),
 
-        Provider<CurrentUserHandler>(
-          create:
-              (context) => CurrentUserHandler(
-                context.read<AuthService>(),
-                context.read<AuthContext>(),
-              ),
-        ),
+        Provider<CurrentUserHandler>(create: (context) => CurrentUserHandler(context.read<AuthService>(), context.read<AuthContext>())),
 
-        Provider<SaveStoreHandler>(
-          create:
-              (context) => SaveStoreHandler(
-                context.read<AuthContext>(),
-                context.read<StoreService>(),
-              ),
-        ),
+        Provider<SaveStoreHandler>(create: (context) => SaveStoreHandler(context.read<AuthContext>(), context.read<StoreService>())),
 
-        Provider<RetrieveTagHandler>(
-          create:
-              (context) => RetrieveTagHandler(
-                context.read<AuthContext>(),
-                context.read<StoreService>(),
-              ),
-        ),
+        Provider<RetrieveTagHandler>(create: (context) => RetrieveTagHandler(context.read<AuthContext>(), context.read<StoreService>())),
 
-        Provider<FindByIdStoreHandler>(
-          create:
-              (context) => FindByIdStoreHandler(
-                context.read<AuthContext>(),
-                context.read<StoreService>(),
-              ),
-        ),
+        Provider<FindByIdStoreHandler>(create: (context) => FindByIdStoreHandler(context.read<AuthContext>(), context.read<StoreService>())),
 
-        Provider<RetrieveProductsHandler>(
-          create:
-              (context) => RetrieveProductsHandler(
-                context.read<AuthContext>(),
-                context.read<ProductService>(),
-              ),
-        ),
+        Provider<RetrieveProductsHandler>(create: (context) => RetrieveProductsHandler(context.read<AuthContext>(), context.read<ProductService>())),
 
         Provider<RetrieveBrandsHandler>(
-          create:
-              (context) => RetrieveBrandsHandler(
-                context.read<AuthContext>(),
-                context.read<MetadataProductService>(),
-              ),
+          create: (context) => RetrieveBrandsHandler(context.read<AuthContext>(), context.read<MetadataProductService>()),
         ),
 
         Provider<RetrieveTargetsHandler>(
-          create:
-              (context) => RetrieveTargetsHandler(
-                context.read<AuthContext>(),
-                context.read<MetadataProductService>(),
-              ),
+          create: (context) => RetrieveTargetsHandler(context.read<AuthContext>(), context.read<MetadataProductService>()),
         ),
 
         Provider<RetrieveCategoriesHandler>(
-          create:
-              (context) => RetrieveCategoriesHandler(
-                context.read<AuthContext>(),
-                context.read<MetadataProductService>(),
-              ),
+          create: (context) => RetrieveCategoriesHandler(context.read<AuthContext>(), context.read<MetadataProductService>()),
         ),
 
-        Provider<CreateProductsHandler>(
-          create:
-              (context) => CreateProductsHandler(
-                context.read<AuthContext>(),
-                context.read<ProductService>(),
-              ),
-        ),
+        Provider<CreateProductsHandler>(create: (context) => CreateProductsHandler(context.read<AuthContext>(), context.read<ProductService>())),
       ],
       child: const MyApp(),
     ),
@@ -151,8 +94,7 @@ Future<void> showNotification(RemoteMessage message) async {
       android: AndroidNotificationDetails(
         'sourcing_channel',
         'solicitudes',
-        channelDescription:
-            'Notificaciones cuando tus productos coinciden con solicitudes',
+        channelDescription: 'Notificaciones cuando tus productos coinciden con solicitudes',
         importance: Importance.max,
         priority: Priority.high,
       ),
@@ -165,17 +107,12 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final loadCurrentUserService = Provider.of<CurrentUserHandler>(
-      context,
-      listen: false,
-    );
+    final loadCurrentUserService = Provider.of<CurrentUserHandler>(context, listen: false);
     final authStore = Provider.of<AuthContext>(context);
 
     if (!authStore.isInitialized) {
       Future.microtask(() => loadCurrentUserService.loadUser());
-      return const MaterialApp(
-        home: Scaffold(body: Center(child: CircularProgressIndicator())),
-      );
+      return MaterialApp(home: Scaffold(body: Center(child: CircularProgressWidget())));
     }
     return MaterialApp.router(routerConfig: router);
   }

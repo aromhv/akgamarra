@@ -6,13 +6,11 @@ part 'retrieve_products_response.g.dart';
 @JsonSerializable()
 class RetrieveProductsResponse {
   int page;
-  int quantity;
   List<RetrieveProductResponse>? products;
 
-  RetrieveProductsResponse({required this.page, required this.quantity});
+  RetrieveProductsResponse({required this.page});
 
-  factory RetrieveProductsResponse.fromJson(Map<String, dynamic> json) =>
-      _$RetrieveProductsResponseFromJson(json);
+  factory RetrieveProductsResponse.fromJson(Map<String, dynamic> json) => _$RetrieveProductsResponseFromJson(json);
 
   Map<String, dynamic> toJson() => _$RetrieveProductsResponseToJson(this);
 }

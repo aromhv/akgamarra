@@ -5,16 +5,11 @@ part 'retrieve_product_request.g.dart';
 @JsonSerializable()
 class RetrieveProductRequest {
   int page;
-  int items;
-  String category;
-  String target;
+  String? brand;
+  String? target;
+  String? category;
 
-  RetrieveProductRequest({
-    required this.page,
-    required this.items,
-    required this.target,
-    required this.category,
-  });
+  RetrieveProductRequest({required this.page, required this.brand, required this.target, required this.category});
 
   Map<String, dynamic> toJson() => _$RetrieveProductRequestToJson(this);
 }

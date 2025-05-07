@@ -10,16 +10,16 @@ RetrieveProductRequest _$RetrieveProductRequestFromJson(
   Map<String, dynamic> json,
 ) => RetrieveProductRequest(
   page: (json['page'] as num).toInt(),
-  items: (json['items'] as num).toInt(),
-  target: json['target'] as String,
-  category: json['category'] as String,
+  brand: json['brand'] as String?,
+  target: json['target'] as String?,
+  category: json['category'] as String?,
 );
 
 Map<String, dynamic> _$RetrieveProductRequestToJson(
   RetrieveProductRequest instance,
 ) => <String, dynamic>{
   'page': instance.page,
-  'items': instance.items,
-  'category': instance.category,
+  'brand': instance.brand,
   'target': instance.target,
+  'category': instance.category,
 };

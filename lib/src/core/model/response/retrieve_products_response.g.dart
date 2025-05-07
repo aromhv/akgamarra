@@ -8,10 +8,7 @@ part of 'retrieve_products_response.dart';
 
 RetrieveProductsResponse _$RetrieveProductsResponseFromJson(
   Map<String, dynamic> json,
-) => RetrieveProductsResponse(
-    page: (json['page'] as num).toInt(),
-    quantity: (json['quantity'] as num).toInt(),
-  )
+) => RetrieveProductsResponse(page: (json['page'] as num).toInt())
   ..products =
       (json['products'] as List<dynamic>?)
           ?.map(
@@ -21,8 +18,4 @@ RetrieveProductsResponse _$RetrieveProductsResponseFromJson(
 
 Map<String, dynamic> _$RetrieveProductsResponseToJson(
   RetrieveProductsResponse instance,
-) => <String, dynamic>{
-  'page': instance.page,
-  'quantity': instance.quantity,
-  'products': instance.products,
-};
+) => <String, dynamic>{'page': instance.page, 'products': instance.products};
