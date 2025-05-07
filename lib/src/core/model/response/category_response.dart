@@ -13,4 +13,6 @@ class CategoryResponse {
       _$CategoryResponseFromJson(json);
 
   Map<String, dynamic> toJson() => _$CategoryResponseToJson(this);
+
+  Map<String, String> toMap() => <String, String>{'key': name, 'value': name};
 }

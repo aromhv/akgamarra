@@ -41,10 +41,7 @@ class MetadataProductService {
   ) async {
     Map<String, dynamic> headers;
     if (target != null) {
-      headers = {
-        "target": Uri.encodeComponent(target),
-        "Authorization": "Bearer $token",
-      };
+      headers = {"target": target, "Authorization": "Bearer $token"};
     } else {
       headers = {"Authorization": "Bearer $token"};
     }
