@@ -42,6 +42,9 @@ class MinimalStoreFormState extends State<CreateStoreScreen> {
     );
   }
 
+  /*
+  ToDo: Optimizar?
+   */
   void _addTag() {
     final newTag = _newTagController.text.trim();
     if (newTag.isNotEmpty && !_tags.contains(newTag)) {
@@ -60,7 +63,6 @@ class MinimalStoreFormState extends State<CreateStoreScreen> {
 
     return Scaffold(
       resizeToAvoidBottomInset: true,
-      appBar: AppBar(title: Text('Registro de Tienda')),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),
         child: Form(

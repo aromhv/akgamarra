@@ -1,3 +1,4 @@
+import 'package:akgamarra_app/src/core/enum/color_enum.dart';
 import 'package:akgamarra_app/src/core/handler/login_handler.dart';
 import 'package:akgamarra_app/src/features/auth/widget/social_media_button.dart';
 import 'package:flutter/material.dart';
@@ -41,8 +42,8 @@ class LoginScreen extends StatelessWidget {
           const Spacer(),
           Container(
             padding: const EdgeInsets.all(80),
-            decoration: const BoxDecoration(
-              color: Color(0xFF650FED),
+            decoration: BoxDecoration(
+              color: ColorEnum.COLOR_PRINCIPAL.color,
               borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(40),
                 topRight: Radius.circular(40),
@@ -52,7 +53,11 @@ class LoginScreen extends StatelessWidget {
               children: [
                 const Text(
                   "¡Bienvenido!",
-                  style: TextStyle(fontSize: 22, color: Colors.white, fontWeight: FontWeight.bold),
+                  style: TextStyle(
+                    fontSize: 22,
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
                 const SizedBox(height: 10),
                 const Text(

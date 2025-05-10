@@ -8,10 +8,10 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final authState = context.watch<AuthContext>();
+    final storeHandler = context.watch<AuthContext>();
     final loginService = context.read<LoginHandler>();
 
-    final user = authState.user;
+    final user = storeHandler.user;
 
     return Scaffold(
       body: Center(
