@@ -1,4 +1,7 @@
-import 'package:akgamarra_app/src/core/model/request/store_request.dart';
+import 'package:akgamarra_app/src/core/enum/color_enum.dart';
+import 'package:akgamarra_app/src/core/enum/icon_enum.dart';
+import 'package:akgamarra_app/src/core/model/request/save_store_request.dart';
+import 'package:akgamarra_app/src/core/widget/button_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -17,19 +20,11 @@ class CreateStoreScreenState extends State<CreateStoreScreen> {
 
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _descriptionController = TextEditingController();
-  final TextEditingController _documentNumberController =
-      TextEditingController();
+  final TextEditingController _documentNumberController = TextEditingController();
 
-  StoreRequest _buildStoreRequest() {
-    Map<String, String> legalDocument = {
-      "documentType": _selectedDocumentType,
-      "documentNumber": _documentNumberController.text,
-    };
-    return StoreRequest(
-      name: _nameController.text,
-      description: _descriptionController.text,
-      legalDocument: legalDocument,
-    );
+  SaveStoreRequest _buildStoreRequest() {
+    Map<String, String> legalDocument = {"documentType": _selectedDocumentType, "documentNumber": _documentNumberController.text};
+    return SaveStoreRequest(name: _nameController.text, description: _descriptionController.text, legalDocument: legalDocument);
   }
 
   @override
@@ -71,16 +66,16 @@ class CreateStoreScreenState extends State<CreateStoreScreen> {
                 validator: (value) => value!.isEmpty ? 'Requerido' : null,
               ),
               SizedBox(height: 20),
-              ElevatedButton(
+              ButtonWidget(
                 onPressed: () async {
-                  if (_formKey.currentState!.validate()) {
-                    context.push(
-                      '/store-create/select-tags',
-                      extra: _buildStoreRequest(),
-                    );
-                  }
+                  if (!_formKey.currentState!.validate()) return;
+                  context.push('/store-create/select-tags', extra: _buildStoreRequest());
                 },
-                child: Text('Contiuar'),
+                icon: IconEnum.ICON_ADD.icon,
+                iconColor: ColorEnum.COLOR_PRINCIPAL.color,
+                buttonColor: ColorEnum.COLOR_SELECTED.color,
+                labelColor: ColorEnum.COLOR_PRINCIPAL.color,
+                label: "Contiuar",
               ),
             ],
           ),

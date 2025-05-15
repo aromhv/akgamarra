@@ -3,7 +3,8 @@ import 'dart:collection';
 import 'package:akgamarra_app/src/core/handler/current_user_handler.dart';
 import 'package:akgamarra_app/src/core/handler/retrieve_tags_handler.dart';
 import 'package:akgamarra_app/src/core/handler/save_store_handler.dart';
-import 'package:akgamarra_app/src/core/model/request/store_request.dart';
+import 'package:akgamarra_app/src/core/model/request/save_store_request.dart';
+import 'package:akgamarra_app/src/core/widget/circular_progress_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
@@ -12,12 +13,10 @@ class SelectedTagsCreateStoreScreen extends StatefulWidget {
   const SelectedTagsCreateStoreScreen({super.key});
 
   @override
-  SelectedTagsCreateStoreScreenState createState() =>
-      SelectedTagsCreateStoreScreenState();
+  SelectedTagsCreateStoreScreenState createState() => SelectedTagsCreateStoreScreenState();
 }
 
-class SelectedTagsCreateStoreScreenState
-    extends State<SelectedTagsCreateStoreScreen> {
+class SelectedTagsCreateStoreScreenState extends State<SelectedTagsCreateStoreScreen> {
   final Set<String> selectedTags = HashSet();
 
   @override
@@ -26,7 +25,7 @@ class SelectedTagsCreateStoreScreenState
     final loadCurrentUserHandler = context.read<CurrentUserHandler>();
 
     final state = GoRouterState.of(context);
-    final StoreRequest request = state.extra as StoreRequest;
+    final SaveStoreRequest request = state.extra as SaveStoreRequest;
 
     return Scaffold(
       body: Center(
@@ -35,7 +34,7 @@ class SelectedTagsCreateStoreScreenState
           builder: (cntx, snapshot) {
             final items = snapshot.data;
             if (items == null || items.isEmpty) {
-              return CircularProgressIndicator();
+              return Center(child: CircularProgressWidget());
             }
             if (snapshot.hasError) context.push("");
 
@@ -54,9 +53,7 @@ class SelectedTagsCreateStoreScreenState
                             selected: selectedTags.contains(tag),
                             onSelected: (selected) {
                               setState(() {
-                                selected
-                                    ? selectedTags.add(tag)
-                                    : selectedTags.remove(tag);
+                                selected ? selectedTags.add(tag) : selectedTags.remove(tag);
                               });
                             },
                           );
@@ -80,14 +77,7 @@ class SelectedTagsCreateStoreScreenState
                       valueListenable: storeHandler.isSaving,
                       builder: (context, isSaving, child) {
                         return isSaving
-                            ? SizedBox(
-                              width: 24,
-                              height: 24,
-                              child: CircularProgressIndicator(
-                                color: Colors.white,
-                                strokeWidth: 2,
-                              ),
-                            )
+                            ? SizedBox(width: 24, height: 24, child: CircularProgressIndicator(color: Colors.white, strokeWidth: 2))
                             : Text('Guardar');
                       },
                     ),

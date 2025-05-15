@@ -15,7 +15,6 @@ class AccountScreen extends StatelessWidget {
     return Scaffold(
       body: Column(
         children: [
-          // Header con fondo degradado
           Stack(
             clipBehavior: Clip.none,
             children: [
@@ -72,7 +71,6 @@ class AccountScreen extends StatelessWidget {
             ],
           ),
           const SizedBox(height: 50),
-          // Stats (puedes reemplazarlos con datos reales si los tienes)
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
             child: Row(
@@ -85,19 +83,17 @@ class AccountScreen extends StatelessWidget {
             ),
           ),
           const Divider(height: 20),
-          // Opciones
           Expanded(
             child: ListView(
               padding: const EdgeInsets.symmetric(horizontal: 20),
               children: [
-                // Mostrar los datos del usuario
                 if (user != null) ...[
                   ListTile(
                     title: Text('Nombre'),
                     subtitle: Text(
-                      user != null && user.verified
+                      user.verified
                           ? '${user.firstName ?? "Nombre no disponible"} ${user.lastName ?? "Apellido no disponible"}'
-                          : user?.alias ?? '',
+                          : user.alias ?? '',
                       style: const TextStyle(color: Colors.black, fontSize: 15),
                     ),
                   ),
