@@ -1,12 +1,12 @@
-import 'package:akgamarra_app/src/core/service/auth_service.dart';
 import 'package:akgamarra_app/src/core/context/auth_context.dart';
+import 'package:akgamarra_app/src/core/service/auth_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-class LoadCurrentUserHandler {
+class CurrentUserHandler {
   final AuthContext authState;
   final AuthService authService;
 
-  LoadCurrentUserHandler(this.authService, this.authState);
+  CurrentUserHandler(this.authService, this.authState);
 
   Future<void> loadUser() async {
     final firebaseUser = FirebaseAuth.instance.currentUser;

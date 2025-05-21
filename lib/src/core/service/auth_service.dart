@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:akgamarra_app/src/core/model/response/user_response.dart';
 import 'package:dio/dio.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 
 class AuthService {
   final Dio dio;
@@ -11,7 +12,10 @@ class AuthService {
 
   Future<UserResponse?> validateToken(String token) async {
     final String METHOD_PATH = '$URL_BASE/auth/validate';
-    var options = Options(headers: {"Authorization": "Bearer $token"});
+    final _fcmToken = await FirebaseMessaging.instance.getToken();
+    var options = Options(
+      headers: {"Authorization": "Bearer $token", "device": _fcmToken},
+    );
 
     try {
       log("Enviando token al backend: $token");

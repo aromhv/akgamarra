@@ -18,19 +18,12 @@ class SocialMediaButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: 325,
+      width: double.infinity,
       child: ElevatedButton.icon(
         style: ElevatedButton.styleFrom(
           foregroundColor: color,
           backgroundColor: Colors.white,
           padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-          /*
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(30),
-            side: BorderSide(color: Colors.grey.shade300),
-          ),
-          elevation: 5,
-         */
         ),
         onPressed: onPressed,
         icon: FaIcon(icon, color: color, size: 24),
