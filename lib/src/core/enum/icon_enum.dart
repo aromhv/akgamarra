@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 enum IconEnum {
+  ICON_CLEAR("clear", Icon(Icons.clear)),
   ICON_CAMERA("camera", Icon(Icons.camera_alt)),
   ICON_PHOTO("photo", Icon(Icons.photo)),
   ICON_IMAGE("image", Icon(Icons.image)),
@@ -29,6 +30,5 @@ enum IconEnum {
 
   const IconEnum(this.name, this.icon);
 
-  static Icon findIconByName(String name) =>
-      values.firstWhere((c) => c.name == name, orElse: () => ICON_HOME).icon;
+  static Icon findIconByName(String name) => values.firstWhere((c) => c.name == name, orElse: () => ICON_HOME).icon;
 }

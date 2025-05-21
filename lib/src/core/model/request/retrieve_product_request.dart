@@ -10,6 +10,4 @@ class RetrieveProductRequest {
   String? category;
 
   RetrieveProductRequest({required this.page, required this.brand, required this.target, required this.category});
-
-  Map<String, dynamic> toJson() => _$RetrieveProductRequestToJson(this);
 }

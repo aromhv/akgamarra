@@ -8,16 +8,29 @@ class CardProductWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(color: Colors.teal, borderRadius: BorderRadius.circular(12)),
-      alignment: Alignment.center,
-      child: Column(
-        children: [
-          Text(item.imageUrl, style: const TextStyle(color: Colors.white, fontSize: 18)),
-          Text(item.category, style: const TextStyle(color: Colors.white, fontSize: 18)),
-          Text(item.name, style: const TextStyle(color: Colors.white, fontSize: 18)),
-          Text(item.target, style: const TextStyle(color: Colors.white, fontSize: 18)),
-        ],
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(12),
+      child: Container(
+        width: 140,
+        constraints: const BoxConstraints(minHeight: 180),
+        decoration: BoxDecoration(color: Colors.grey[200], image: DecorationImage(image: NetworkImage(item.imageUrl), fit: BoxFit.cover)),
+        child: Align(
+          alignment: Alignment.bottomCenter,
+          child: Container(
+            width: double.infinity,
+            padding: const EdgeInsets.all(8),
+            decoration: const BoxDecoration(
+              gradient: LinearGradient(colors: [Colors.black87, Colors.transparent], begin: Alignment.bottomCenter, end: Alignment.topCenter),
+            ),
+            child: Text(
+              item.name,
+              style: const TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.w600),
+              softWrap: true,
+              maxLines: 3,
+              overflow: TextOverflow.ellipsis,
+            ),
+          ),
+        ),
       ),
     );
   }

@@ -73,6 +73,7 @@ class _ProductsScreenState extends State<ProductsScreen> {
           },
         ),
         ButtonsRetrieveProductWidget(
+          onPressedClearFilters: () async => {setState(() {})},
           onPressedSearch: () async => showFilteredModal(),
           onPressedCreateScreen: () async => context.push("/products/create"),
         ),

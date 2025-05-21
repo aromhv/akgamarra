@@ -11,8 +11,9 @@ import 'package:akgamarra_app/src/core/handler/retrieve_tags_handler.dart';
 import 'package:akgamarra_app/src/core/handler/retrieve_targets_handler.dart';
 import 'package:akgamarra_app/src/core/handler/save_store_handler.dart';
 import 'package:akgamarra_app/src/core/service/auth_service.dart';
-import 'package:akgamarra_app/src/core/service/metadata_product_service.dart';
-import 'package:akgamarra_app/src/core/service/product_service.dart';
+import 'package:akgamarra_app/src/core/service/products/product_service.dart';
+import 'package:akgamarra_app/src/core/service/products/retrieve_product_metadata_service.dart';
+import 'package:akgamarra_app/src/core/service/products/retrieve_product_service.dart';
 import 'package:akgamarra_app/src/core/service/socialmedia/google_service.dart';
 import 'package:akgamarra_app/src/core/service/store_service.dart';
 import 'package:akgamarra_app/src/core/widget/circular_progress_widget.dart';
@@ -48,7 +49,8 @@ Future<void> main() async {
         Provider<AuthService>(create: (_) => AuthService(dio: dio)),
         Provider<StoreService>(create: (_) => StoreService(dio: dio)),
         Provider<ProductService>(create: (_) => ProductService(dio: dio)),
-        Provider<MetadataProductService>(create: (_) => MetadataProductService(dio: dio)),
+        Provider<RetrieveProductService>(create: (_) => RetrieveProductService(dio: dio)),
+        Provider<RetrieveProductMetadataService>(create: (_) => RetrieveProductMetadataService(dio: dio)),
         Provider<GoogleService>(create: (_) => GoogleService()),
 
         Provider<LoginHandler>(
@@ -63,18 +65,20 @@ Future<void> main() async {
 
         Provider<FindByIdStoreHandler>(create: (context) => FindByIdStoreHandler(context.read<AuthContext>(), context.read<StoreService>())),
 
-        Provider<RetrieveProductsHandler>(create: (context) => RetrieveProductsHandler(context.read<AuthContext>(), context.read<ProductService>())),
+        Provider<RetrieveProductsHandler>(
+          create: (context) => RetrieveProductsHandler(context.read<AuthContext>(), context.read<RetrieveProductService>()),
+        ),
 
         Provider<RetrieveBrandsHandler>(
-          create: (context) => RetrieveBrandsHandler(context.read<AuthContext>(), context.read<MetadataProductService>()),
+          create: (context) => RetrieveBrandsHandler(context.read<AuthContext>(), context.read<RetrieveProductMetadataService>()),
         ),
 
         Provider<RetrieveTargetsHandler>(
-          create: (context) => RetrieveTargetsHandler(context.read<AuthContext>(), context.read<MetadataProductService>()),
+          create: (context) => RetrieveTargetsHandler(context.read<AuthContext>(), context.read<RetrieveProductMetadataService>()),
         ),
 
         Provider<RetrieveCategoriesHandler>(
-          create: (context) => RetrieveCategoriesHandler(context.read<AuthContext>(), context.read<MetadataProductService>()),
+          create: (context) => RetrieveCategoriesHandler(context.read<AuthContext>(), context.read<RetrieveProductMetadataService>()),
         ),
 
         Provider<CreateProductsHandler>(create: (context) => CreateProductsHandler(context.read<AuthContext>(), context.read<ProductService>())),
