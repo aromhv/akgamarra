@@ -73,7 +73,15 @@ class _ProductsScreenState extends State<ProductsScreen> {
           },
         ),
         ButtonsRetrieveProductWidget(
-          onPressedClearFilters: () async => {setState(() {})},
+          onPressedClearFilters:
+              () async => {
+                setState(() {
+                  request.page = 0;
+                  request.brand = null;
+                  request.target = null;
+                  request.category = null;
+                }),
+              },
           onPressedSearch: () async => showFilteredModal(),
           onPressedCreateScreen: () async => context.push("/products/create"),
         ),
@@ -88,8 +96,10 @@ class _ProductsScreenState extends State<ProductsScreen> {
       content: FilterProductsModalWidget(
         onChanged: (filters) {
           setState(() {
-            request.category = filters.category;
+            request.page = 0;
+            request.brand = filters.brand;
             request.target = filters.target;
+            request.category = filters.category;
           });
         },
       ),
