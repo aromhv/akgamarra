@@ -14,6 +14,7 @@ RetrieveProductResponse _$RetrieveProductResponseFromJson(
   target: json['target'] as String,
   category: json['category'] as String,
   imageUrl: json['imageUrl'] as String,
+  brand: json['brand'] as String,
 );
 
 Map<String, dynamic> _$RetrieveProductResponseToJson(
@@ -24,4 +25,5 @@ Map<String, dynamic> _$RetrieveProductResponseToJson(
   'target': instance.target,
   'category': instance.category,
   'imageUrl': instance.imageUrl,
+  'brand': instance.brand,
 };
