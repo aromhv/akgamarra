@@ -69,7 +69,7 @@ class SelectedTagsCreateStoreScreenState extends State<SelectedTagsCreateStoreSc
                                 request.tags = selectedTags;
 
                                 await storeHandler.save(request);
-                                await loadCurrentUserHandler.loadUser();
+                                await loadCurrentUserHandler.loadSession();
                                 context.go('/store');
                               }
                             },
