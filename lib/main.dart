@@ -1,6 +1,6 @@
 import 'package:akgamarra_app/app_initializer.dart';
-import 'package:akgamarra_app/my_app.dart';
 import 'package:akgamarra_app/src/core/util/notification_util.dart';
+import 'package:akgamarra_app/src/core/widget/my_app_widget.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
@@ -18,5 +18,5 @@ Future<void> main() async {
   const initSettings = InitializationSettings(android: androidInit);
   await flutterLocalNotificationsPlugin.initialize(initSettings);
   FirebaseMessaging.onMessage.listen((RemoteMessage message) => showNotification(message));
-  runApp(const AppInitializer(child: MyApp()));
+  runApp(const AppInitializer(child: MyAppWidget()));
 }
