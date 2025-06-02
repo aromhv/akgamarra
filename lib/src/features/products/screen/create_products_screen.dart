@@ -3,7 +3,7 @@ import 'package:akgamarra_app/src/core/handler/create_products_handler.dart';
 import 'package:akgamarra_app/src/core/model/request/save_product_request.dart';
 import 'package:akgamarra_app/src/core/widget/input_number_widget.dart';
 import 'package:akgamarra_app/src/core/widget/input_text_widget.dart';
-import 'package:akgamarra_app/src/core/widget/modal/modal_utils.dart';
+import 'package:akgamarra_app/src/core/util/modal_util.dart';
 import 'package:akgamarra_app/src/features/products/widget/buttons_create_product_widget.dart';
 import 'package:akgamarra_app/src/features/products/widget/modal/filter_products_modal_widget.dart';
 import 'package:flutter/material.dart';

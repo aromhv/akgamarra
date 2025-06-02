@@ -16,11 +16,9 @@ class LoginScreen extends StatelessWidget {
     singInSocialMedia(String service) async {
       final user = await loginHandler.signIn(service);
       if (user != null) {
-        context.go('/');
+        context.go('/sourcing');
       } else {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text("Error al iniciar sesión")),
-        );
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Error al iniciar sesión")));
       }
     }
 
@@ -33,10 +31,7 @@ class LoginScreen extends StatelessWidget {
             children: [
               Image.asset('assets/logo.jpg', height: 300),
               const SizedBox(height: 10),
-              const Text(
-                "GAMARRA AKa",
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-              ),
+              const Text("GAMARRA AKa", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
             ],
           ),
           const Spacer(),
@@ -44,21 +39,11 @@ class LoginScreen extends StatelessWidget {
             padding: const EdgeInsets.all(80),
             decoration: BoxDecoration(
               color: ColorEnum.COLOR_PRINCIPAL.color,
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(40),
-                topRight: Radius.circular(40),
-              ),
+              borderRadius: BorderRadius.only(topLeft: Radius.circular(40), topRight: Radius.circular(40)),
             ),
             child: Column(
               children: [
-                const Text(
-                  "¡Bienvenido!",
-                  style: TextStyle(
-                    fontSize: 22,
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
+                const Text("¡Bienvenido!", style: TextStyle(fontSize: 22, color: Colors.white, fontWeight: FontWeight.bold)),
                 const SizedBox(height: 10),
                 const Text(
                   "Para iniciar sesión usa tu cuenta de Google o cuenta de Facebook",

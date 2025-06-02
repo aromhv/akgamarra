@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-class CustomModalDialog extends StatelessWidget {
+class CustomModalWidget extends StatelessWidget {
   final String title;
   final Widget content;
   final List<Widget> actions;
 
-  const CustomModalDialog({super.key, required this.title, required this.content, required this.actions});
+  const CustomModalWidget({super.key, required this.title, required this.content, required this.actions});
 
   @override
   Widget build(BuildContext context) {

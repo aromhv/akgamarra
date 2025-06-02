@@ -3,7 +3,7 @@ import 'package:akgamarra_app/src/core/handler/retrieve_products_handler.dart';
 import 'package:akgamarra_app/src/core/model/request/retrieve_product_request.dart';
 import 'package:akgamarra_app/src/core/model/response/retrieve_product_response.dart';
 import 'package:akgamarra_app/src/core/widget/circular_progress_widget.dart';
-import 'package:akgamarra_app/src/core/widget/modal/modal_utils.dart';
+import 'package:akgamarra_app/src/core/util/modal_util.dart';
 import 'package:akgamarra_app/src/features/products/widget/buttons_retrieve_product_widget.dart';
 import 'package:akgamarra_app/src/features/products/widget/card_product_widget.dart';
 import 'package:akgamarra_app/src/features/products/widget/modal/filter_products_modal_widget.dart';
