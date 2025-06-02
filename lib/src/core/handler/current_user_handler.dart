@@ -2,6 +2,7 @@ import 'package:akgamarra_app/src/core/context/auth_context.dart';
 import 'package:akgamarra_app/src/core/service/auth_service.dart';
 import 'package:akgamarra_app/src/core/service/session_tag_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 
 class CurrentUserHandler {
   final AuthContext authContext;
@@ -22,8 +23,9 @@ class CurrentUserHandler {
 
   Future<void> loadUser(User user) async {
     final bearerToken = await user.getIdToken(true);
-    if (bearerToken != null) {
-      final user = await authService.validateToken(bearerToken);
+    final fcmToken = await FirebaseMessaging.instance.getToken();
+    if (bearerToken != null && fcmToken != null) {
+      final user = await authService.validateToken(bearerToken, fcmToken);
       await sessionTagService.save(bearerToken);
       authContext.setSession(user!, bearerToken);
     } else {

@@ -9,11 +9,11 @@ class SessionTagService {
 
   SessionTagService({required Dio dio}) : _dio = dio;
 
-  Future<Void?> save(String token) async {
-    var options = Options(headers: {"Authorization": "Bearer $token"});
+  Future<Void?> save(String bearerToken) async {
+    var options = Options(headers: {"Authorization": "Bearer $bearerToken"});
     try {
       await _dio.post(_urlBase, options: options);
-    } catch (e, stacktrace) {
+    } catch (e) {
       log("error");
       log(e.toString());
     }

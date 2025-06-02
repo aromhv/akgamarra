@@ -53,7 +53,13 @@ class _AppInitializerState extends State<AppInitializer> {
         Provider<RetrieveProductMetadataService>(create: (_) => RetrieveProductMetadataService(dio: dio)),
 
         Provider<LoginHandler>(
-          create: (context) => LoginHandler(context.read<AuthService>(), context.read<GoogleService>(), context.read<AuthContext>()),
+          create:
+              (context) => LoginHandler(
+                context.read<AuthService>(),
+                context.read<GoogleService>(),
+                context.read<AuthContext>(),
+                context.read<SessionTagService>(),
+              ),
         ),
         Provider<CurrentUserHandler>(
           create: (context) => CurrentUserHandler(context.read<AuthService>(), context.read<AuthContext>(), context.read<SessionTagService>()),

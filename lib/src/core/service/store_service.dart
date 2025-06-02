@@ -4,14 +4,14 @@ import 'package:dio/dio.dart';
 
 class StoreService {
   final Dio dio;
-  final String URL_BASE = "http://69.197.164.187:8982/store";
+  final String _urlBase = "http://69.197.164.187:8982/store";
 
   StoreService({required this.dio});
 
   Future<StoreResponse?> save(String token, SaveStoreRequest request) async {
     var options = Options(headers: {"Authorization": "Bearer $token"});
     try {
-      final response = await dio.post('$URL_BASE/save', options: options, data: request.toJson());
+      final response = await dio.post('$_urlBase/save', options: options, data: request.toJson());
       return StoreResponse.fromJson(response.data);
     } catch (e, stacktrace) {
       return null;
@@ -21,7 +21,7 @@ class StoreService {
   Future<StoreResponse?> findById(String token, String id) async {
     var options = Options(headers: {"Authorization": "Bearer $token"});
     try {
-      final response = await dio.get('$URL_BASE/retrieve/$id', options: options);
+      final response = await dio.get('$_urlBase/retrieve/$id', options: options);
       return StoreResponse.fromJson(response.data);
     } catch (e, stacktrace) {
       return null;
@@ -31,7 +31,7 @@ class StoreService {
   Future<Set<String>> retrieveTags(String token) async {
     final options = Options(headers: {"Authorization": "Bearer $token"});
     try {
-      final response = await dio.get('$URL_BASE/metadata/tags', options: options);
+      final response = await dio.get('$_urlBase/metadata/tags', options: options);
       return response.data.whereType<String>().toSet();
     } catch (e, stackTrace) {
       return <String>{};
