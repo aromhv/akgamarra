@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 enum IconEnum {
+  ICON_NOTIFICATION_SOURCING("notification_sourcing", Icon(Icons.notifications)),
   ICON_SOURCING("source", Icon(Icons.request_quote)),
   ICON_CLEAR("clear", Icon(Icons.clear)),
   ICON_CAMERA("camera", Icon(Icons.camera_alt)),
