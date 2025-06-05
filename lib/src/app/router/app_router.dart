@@ -4,6 +4,7 @@ import 'package:akgamarra_app/src/features/account/screen/account_screen.dart';
 import 'package:akgamarra_app/src/features/account/screen/create_account_screen.dart';
 import 'package:akgamarra_app/src/features/auth/screen/login_screen.dart';
 import 'package:akgamarra_app/src/features/me-store/screen/me_store_screen.dart';
+import 'package:akgamarra_app/src/features/notification_sourcing/screen/notification_sourcing_screen.dart';
 import 'package:akgamarra_app/src/features/products/screen/create_products_screen.dart';
 import 'package:akgamarra_app/src/features/products/screen/products_screen.dart';
 import 'package:akgamarra_app/src/features/sourcing/screen/selected_brand_and_name_sourcing_screen.dart';
@@ -26,6 +27,7 @@ final GoRouter router = GoRouter(
           builder: (context, state) => SourcingScreen(),
           routes: [GoRoute(path: 'select-brand-and-name', builder: (context, state) => SelectedBrandAndNameSourcingScreen())],
         ),
+        GoRoute(path: '/notification_sourcing', builder: (context, state) => NotificationSourcing()),
         GoRoute(path: '/store', builder: (context, state) => const MeStoreScreen()),
         GoRoute(
           path: '/store-create',

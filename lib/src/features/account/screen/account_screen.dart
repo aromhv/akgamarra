@@ -9,8 +9,8 @@ class AccountScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final storeHandler = context.read<AuthContext>();
-    final user = storeHandler.user;
+    final authContext = context.read<AuthContext>();
+    final user = authContext.user;
 
     return Scaffold(
       body: Column(
@@ -27,24 +27,13 @@ class AccountScreen extends StatelessWidget {
                   children: [
                     const SizedBox(height: 30),
                     Text(
-                      user != null && user.verified
-                          ? '${user.firstName} ${user.lastName}'
-                          : user?.alias ?? '',
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 36,
-                        fontWeight: FontWeight.bold,
-                      ),
+                      user != null && user.verified ? '${user.firstName} ${user.lastName}' : user?.alias ?? '',
+                      style: const TextStyle(color: Colors.white, fontSize: 36, fontWeight: FontWeight.bold),
                     ),
                     const SizedBox(height: 5),
                     Text(
-                      user != null && user.verified
-                          ? 'Bienvenido a tu perfil'
-                          : user?.email ?? '',
-                      style: const TextStyle(
-                        color: Colors.white70,
-                        fontSize: 14,
-                      ),
+                      user != null && user.verified ? 'Bienvenido a tu perfil' : user?.email ?? '',
+                      style: const TextStyle(color: Colors.white70, fontSize: 14),
                     ),
                   ],
                 ),
@@ -60,10 +49,7 @@ class AccountScreen extends StatelessWidget {
                     backgroundImage:
                         user?.picture != null && user!.picture.isNotEmpty
                             ? NetworkImage(user.picture)
-                            : const AssetImage(
-                                  'assets/images/profile_placeholder.png',
-                                )
-                                as ImageProvider,
+                            : const AssetImage('assets/images/profile_placeholder.png') as ImageProvider,
                     backgroundColor: Colors.white,
                   ),
                 ),
@@ -91,29 +77,14 @@ class AccountScreen extends StatelessWidget {
                   ListTile(
                     title: Text('Nombre'),
                     subtitle: Text(
-                      user.verified
-                          ? '${user.firstName ?? "Nombre no disponible"} ${user.lastName ?? "Apellido no disponible"}'
-                          : user.alias ?? '',
+                      user.verified ? '${user.firstName ?? "Nombre no disponible"} ${user.lastName ?? "Apellido no disponible"}' : user.alias ?? '',
                       style: const TextStyle(color: Colors.black, fontSize: 15),
                     ),
                   ),
-                  ListTile(
-                    title: Text('Teléfono'),
-                    subtitle: Text(user.numberPhone ?? 'No disponible'),
-                  ),
-                  ListTile(
-                    title: Text('Tipo de documento'),
-                    subtitle: Text(user.documentType ?? 'No disponible'),
-                  ),
-                  ListTile(
-                    title: Text('Número de documento'),
-                    subtitle: Text(user.documentNumber ?? 'No disponible'),
-                  ),
-                  if (user.storeId != null)
-                    ListTile(
-                      title: Text('ID de tienda'),
-                      subtitle: Text(user.storeId ?? 'No disponible'),
-                    ),
+                  ListTile(title: Text('Teléfono'), subtitle: Text(user.numberPhone ?? 'No disponible')),
+                  ListTile(title: Text('Tipo de documento'), subtitle: Text(user.documentType ?? 'No disponible')),
+                  ListTile(title: Text('Número de documento'), subtitle: Text(user.documentNumber ?? 'No disponible')),
+                  if (user.store != null) ListTile(title: Text('ID de tienda'), subtitle: Text(user.store?.id ?? 'No disponible')),
                 ],
                 if (user != null && !user.verified)
                   Padding(
@@ -123,22 +94,11 @@ class AccountScreen extends StatelessWidget {
                       style: ElevatedButton.styleFrom(
                         backgroundColor: ColorEnum.COLOR_PRINCIPAL.color,
                         foregroundColor: Colors.white,
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 20,
-                          vertical: 15,
-                        ),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(30),
-                        ),
+                        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
                         elevation: 5,
                       ),
-                      child: const Text(
-                        "Completar mis datos",
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
+                      child: const Text("Completar mis datos", style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
                     ),
                   ),
               ],
@@ -160,10 +120,7 @@ class _StatItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Text(
-          value,
-          style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
-        ),
+        Text(value, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
         const SizedBox(height: 4),
         Text(label, style: const TextStyle(color: Colors.grey)),
       ],

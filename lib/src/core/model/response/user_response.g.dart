@@ -20,12 +20,15 @@ UserResponse _$UserResponseFromJson(Map<String, dynamic> json) =>
           json['navigation'] as Map<String, dynamic>,
         ),
       )
-      ..storeId = json['storeId'] as String?
       ..lastName = json['lastName'] as String?
       ..firstName = json['firstName'] as String?
       ..numberPhone = json['numberPhone'] as String?
       ..documentType = json['documentType'] as String?
-      ..documentNumber = json['documentNumber'] as String?;
+      ..documentNumber = json['documentNumber'] as String?
+      ..store =
+          json['store'] == null
+              ? null
+              : StoreResponse.fromJson(json['store'] as Map<String, dynamic>);
 
 Map<String, dynamic> _$UserResponseToJson(UserResponse instance) =>
     <String, dynamic>{
@@ -35,10 +38,10 @@ Map<String, dynamic> _$UserResponseToJson(UserResponse instance) =>
       'verified': instance.verified,
       'roles': instance.roles,
       'navigation': instance.navigation,
-      'storeId': instance.storeId,
       'lastName': instance.lastName,
       'firstName': instance.firstName,
       'numberPhone': instance.numberPhone,
       'documentType': instance.documentType,
       'documentNumber': instance.documentNumber,
+      'store': instance.store,
     };
