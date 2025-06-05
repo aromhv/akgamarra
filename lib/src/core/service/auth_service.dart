@@ -1,6 +1,6 @@
-import 'dart:developer';
+import 'dart:ffi';
 
-import 'package:akgamarra_app/src/core/model/response/user_response.dart';
+import 'package:akgamarra_app/src/core/model/request/save_user_request.dart';
 import 'package:dio/dio.dart';
 
 class AuthService {
@@ -9,13 +9,12 @@ class AuthService {
 
   AuthService({required this.dio});
 
-  Future<UserResponse?> validateToken(String bearerToken, String fcmDeviceToken) async {
-    var options = Options(headers: {"Authorization": "Bearer $bearerToken", "device": fcmDeviceToken});
+  Future<Void?> save(SaveUserRequest request, String bearerToken) async {
+    var options = Options(headers: {"Authorization": "Bearer $bearerToken"});
     try {
-      final response = await dio.get('$_urlBase/validate', options: options);
-      return UserResponse.fromJson(response.data);
+      await dio.post(_urlBase, options: options, data: request.toJson());
     } catch (e, stacktrace) {
-      log(e.toString());
+      throw Error();
     }
   }
 }

@@ -18,16 +18,6 @@ class StoreService {
     }
   }
 
-  Future<StoreResponse?> findById(String token, String id) async {
-    var options = Options(headers: {"Authorization": "Bearer $token"});
-    try {
-      final response = await dio.get('$_urlBase/retrieve/$id', options: options);
-      return StoreResponse.fromJson(response.data);
-    } catch (e, stacktrace) {
-      return null;
-    }
-  }
-
   Future<Set<String>> retrieveTags(String token) async {
     final options = Options(headers: {"Authorization": "Bearer $token"});
     try {

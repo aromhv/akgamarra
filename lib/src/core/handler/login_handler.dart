@@ -1,26 +1,21 @@
 import 'package:akgamarra_app/src/core/context/auth_context.dart';
 import 'package:akgamarra_app/src/core/model/response/user_response.dart';
-import 'package:akgamarra_app/src/core/service/auth_service.dart';
-import 'package:akgamarra_app/src/core/service/session_tag_service.dart';
 import 'package:akgamarra_app/src/core/service/socialmedia/google_service.dart';
+import 'package:akgamarra_app/src/core/service/user_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
 
 class LoginHandler {
   final AuthContext authState;
-  final AuthService authService;
+  final UserService userService;
   final GoogleService googleService;
-  final SessionTagService sessionTagService;
 
-  LoginHandler(this.authService, this.googleService, this.authState, this.sessionTagService);
+  LoginHandler(this.userService, this.googleService, this.authState);
 
   Future<UserResponse?> signIn(String socialMedia) async {
     try {
       final bearerToken = await googleService.retrieveTokenWithGoogle();
-      final fcmToken = await FirebaseMessaging.instance.getToken();
-      if (bearerToken != null && fcmToken != null) {
-        final user = await authService.validateToken(bearerToken, fcmToken);
-        await sessionTagService.save(bearerToken);
+      if (bearerToken != null) {
+        final user = await userService.retrieveUser(bearerToken);
         authState.setSession(user!, bearerToken);
         return user;
       }

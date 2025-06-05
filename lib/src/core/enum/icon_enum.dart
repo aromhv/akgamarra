@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 enum IconEnum {
+  ICON_NOTIFICATION_SOURCING("notification_sourcing", Icon(Icons.notifications)),
+  ICON_SOURCING("source", Icon(Icons.request_quote)),
   ICON_CLEAR("clear", Icon(Icons.clear)),
   ICON_CAMERA("camera", Icon(Icons.camera_alt)),
   ICON_PHOTO("photo", Icon(Icons.photo)),
@@ -23,7 +25,7 @@ enum IconEnum {
   ICON_REVIEWS("reviews", Icon(Icons.reviews)),
   ICON_LOGOUT("logout", Icon(Icons.logout)),
   ICON_NOTIFICATION("notification", Icon(Icons.notifications)),
-  ICON_HOME("home", Icon(Icons.home));
+  ICON_HOME("sourcing", Icon(Icons.home));
 
   final String name;
   final Icon icon;
