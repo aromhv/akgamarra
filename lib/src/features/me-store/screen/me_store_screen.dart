@@ -10,6 +10,6 @@ class MeStoreScreen extends StatelessWidget {
     final authContext = context.read<AuthContext>();
     final user = authContext.user;
 
-    return Scaffold(body: Center(child: Text(user!.store!.name)));
+    return Scaffold(body: Center(child: Text((user != null && user.store != null) ? user.store!.name : "")));
   }
 }
